@@ -48,7 +48,7 @@ const authSlice = createSlice({
   name: "auth",
   initialState,
   reducers: {
-    userRegistered: (state, action: PayloadAction<{ token: string }>) => {
+    useRegistration: (state, action: PayloadAction<{ token: string }>) => {
       // ✅ Renamed from `useRegistration`
       state.token = action.payload.token;
     },
@@ -66,7 +66,7 @@ const authSlice = createSlice({
   },
 });
 
-export const { userRegistered, userLoggedIn, userLoggedOut } =
+export const { useRegistration, userLoggedIn, userLoggedOut } =
   authSlice.actions;
 
 export default authSlice.reducer;

@@ -13,7 +13,10 @@ import { useSelector } from "react-redux";
 import Image from "next/image";
 import avatar from "../public/assets/default-user.png";
 import { useSession } from "next-auth/react";
-import { useSocialAuthMutation } from "../redux/features/auth/authApi";
+import {
+  useLogOutQuery,
+  useSocialAuthMutation,
+} from "../redux/features/auth/authApi";
 import toast from "react-hot-toast";
 type Props = {
   open: boolean;
@@ -29,21 +32,34 @@ const Header: FC<Props> = ({ activeItem, setOpen, route, open, setRoute }) => {
   const user = useSelector((state: any) => state.auth.user);
   const { data } = useSession();
   const [socialAuth, { isSuccess, error }] = useSocialAuthMutation();
+  const [logout, setLogout] = useState(false);
 
   useEffect(() => {
-    if (!user) {
-      if (data) {
-        socialAuth({
-          email: data?.user?.email,
-          name: data?.user?.name,
-          avatar: data?.user?.image,
-        });
-      }
+    console.log("DATA from NextAuth:", data);
+    console.log("USER from Redux:", user);
+  }, [data, user]);
+
+  const {} = useLogOutQuery(undefined, {
+    skip: !logout ? true : false,
+  });
+  useEffect(() => {
+    if (!user && data) {
+      socialAuth({
+        email: data?.user?.email,
+        name: data?.user?.name,
+        avatar: data?.user?.image,
+      });
     }
+
+    if (data === null && logout) {
+      // ✅ Only log out when "logout" is true
+      setLogout(true);
+    }
+
     if (isSuccess) {
       toast.success("Login Successfully");
     }
-  }, [data, user]);
+  }, [data, user, logout, isSuccess]);
 
   if (typeof window !== "undefined") {
     window.addEventListener("scroll", () => {
@@ -60,7 +76,6 @@ const Header: FC<Props> = ({ activeItem, setOpen, route, open, setRoute }) => {
       setOpenSidebar(false);
     }
   };
-  console.log(data);
 
   return (
     <div className="w-full relative">
@@ -96,16 +111,22 @@ const Header: FC<Props> = ({ activeItem, setOpen, route, open, setRoute }) => {
                 <>
                   <Link href={"/profile"}>
                     <Image
-                      src={user?.avatar || avatar}
-                      alt=""
-                      className="w-[30px] h-[30px] rounded-full cursor-pointer"
+                      src={user?.avatar.url || avatar}
+                      alt="User Avatar"
+                      width={30}
+                      height={30}
+                      className=" rounded-full cursor-pointer"
+                      onClick={(e) => e.stopPropagation()} // ✅ Prevent unintended
+                      style={{
+                        border: activeItem === 5 ? "2px solid #ffc107" : "",
+                      }}
                     />
                   </Link>
                 </>
               ) : (
                 <HiOutlineUserCircle
                   size={25}
-                  className=" hidden 800px:block cursor-pointer dark:text-white text-black"
+                  className="hidden 800px:block cursor-pointer dark:text-white text-black"
                   onClick={() => setOpen(true)}
                 />
               )}
