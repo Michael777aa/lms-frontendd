@@ -5,6 +5,8 @@ import avatarDefault from "../../public/assets/default-user.png";
 import { RiLockPasswordLine } from "react-icons/ri";
 import { SiCoursera } from "react-icons/si";
 import { AiOutlineLogout } from "react-icons/ai";
+import { MdOutlineAdminPanelSettings } from "react-icons/md";
+import Link from "next/link";
 
 type Props = {
   user: any;
@@ -49,7 +51,7 @@ const SideBarProfile: FC<Props> = ({
           active === 2 ? "dark:bg-slate-800 bg-white" : "bg-transparent"
         }`}
       >
-        <RiLockPasswordLine size={20} fill="#fff" />
+        <RiLockPasswordLine size={20} className="dark:text-white text-black" />
         <h5 className="pl-2 800px:block hidden font-Poppins text-black dark:text-white">
           Change Password
         </h5>
@@ -60,18 +62,36 @@ const SideBarProfile: FC<Props> = ({
           active === 3 ? "dark:bg-slate-800 bg-white" : "bg-transparent"
         }`}
       >
-        <SiCoursera size={20} fill="#fff" />
+        <SiCoursera size={20} className="dark:text-white text-black" />
         <h5 className="pl-2 800px:block hidden font-Poppins text-black dark:text-white">
           Enrolled Courses
         </h5>
       </div>
+      {user.role === "admin" && (
+        <Link href={"/admin"}>
+          <div
+            onClick={() => setActive(6)}
+            className={`w-full flex items-center px-3 py-4 cursor-pointer ${
+              active === 6 ? "dark:bg-slate-800 bg-white" : "bg-transparent"
+            }`}
+          >
+            <MdOutlineAdminPanelSettings
+              size={20}
+              className="dark:text-white text-black"
+            />
+            <h5 className="pl-2 800px:block hidden font-Poppins text-black dark:text-white">
+              Admin Dashboard
+            </h5>
+          </div>
+        </Link>
+      )}
       <div
         onClick={() => logOutHandler()}
         className={`w-full flex items-center px-3 py-4 cursor-pointer ${
           active === 4 ? "dark:bg-slate-800 bg-white" : "bg-transparent"
         }`}
       >
-        <AiOutlineLogout size={20} fill="#fff" />
+        <AiOutlineLogout size={20} className="dark:text-white text-black" />
         <h5 className="pl-2 800px:block hidden font-Poppins text-black dark:text-white">
           Log Out
         </h5>
