@@ -20,7 +20,7 @@ import {
   SettingsIcon,
   ExitToAppIcon,
   HomeOutlinedIcon,
-} from "../sidebar/Icon";
+} from "./Icon";
 
 import avatarDefault from "../../../public/assets/default-user.png";
 import { useSelector } from "react-redux";
