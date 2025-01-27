@@ -4,6 +4,7 @@ import CourseOptions from "./CourseOptions";
 import CourseData from "./CourseData";
 import CourseContent from "./CourseContent";
 import { log } from "console";
+import CoursePreview from "./CoursePreview";
 
 interface Props {}
 
@@ -76,8 +77,10 @@ const CreateCourse: React.FC<Props> = (props) => {
     };
     setCourseData(data);
   };
-  console.log("DATA", courseData);
 
+  const handleCourseCreate = (e: any) => {
+    const data = courseData;
+  };
   return (
     <div className="w-full flex min-h-screen">
       <div className="w-[80%]">
@@ -108,6 +111,14 @@ const CreateCourse: React.FC<Props> = (props) => {
             courseContentData={courseContentData}
             setCourseContentData={setCourseContentData}
             handleSubmit={handleSubmit}
+          />
+        )}
+        {active === 3 && (
+          <CoursePreview
+            active={active}
+            setActive={setActive}
+            courseData={courseData}
+            handleCourseCreate={handleCourseCreate}
           />
         )}
       </div>
