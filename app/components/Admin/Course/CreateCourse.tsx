@@ -1,15 +1,32 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import CourseInformation from "./CourseInformation";
 import CourseOptions from "./CourseOptions";
 import CourseData from "./CourseData";
 import CourseContent from "./CourseContent";
-import { log } from "console";
 import CoursePreview from "./CoursePreview";
+import { useCreateCourseMutation } from "@/app/redux/features/courses/coursesApi";
+import toast from "react-hot-toast";
+import { redirect } from "next/navigation";
 
 interface Props {}
 
 const CreateCourse: React.FC<Props> = (props) => {
   const [active, setActive] = useState(2);
+  const [createCourse, { isLoading, isSuccess, error }] =
+    useCreateCourseMutation();
+
+  useEffect(() => {
+    if (isSuccess) {
+      toast.success("Course created successfully");
+      redirect("/admin-all/courses");
+    }
+    if (error) {
+      if ("data" in error) {
+        const errorMessage = error as any;
+        toast.error(errorMessage.data.message);
+      }
+    }
+  }, [isLoading, isSuccess, error]);
 
   const [courseInfo, setCourseInfo] = useState({
     name: "",
@@ -78,8 +95,11 @@ const CreateCourse: React.FC<Props> = (props) => {
     setCourseData(data);
   };
 
-  const handleCourseCreate = (e: any) => {
+  const handleCourseCreate = async (e: any) => {
     const data = courseData;
+    if (!isLoading) {
+      await createCourse(data);
+    }
   };
   return (
     <div className="w-full flex min-h-screen">

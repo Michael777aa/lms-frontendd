@@ -18,6 +18,7 @@ import {
   useSocialAuthMutation,
 } from "../redux/features/auth/authApi";
 import toast from "react-hot-toast";
+import VideoChat from "./VideoChat";
 type Props = {
   open: boolean;
   setOpen: (open: boolean) => void;
@@ -33,7 +34,7 @@ const Header: FC<Props> = ({ activeItem, setOpen, route, open, setRoute }) => {
   const { data } = useSession();
   const [socialAuth, { isSuccess, error }] = useSocialAuthMutation();
   const [logout, setLogout] = useState(false);
-
+  const [showVideoChat, setShowVideoChat] = useState(false);
   useEffect(() => {
     console.log("DATA from NextAuth:", data);
     console.log("USER from Redux:", user);
@@ -184,7 +185,19 @@ const Header: FC<Props> = ({ activeItem, setOpen, route, open, setRoute }) => {
           )}
         </>
       )}
+      {/* 
+     
+     
+      <div>
+        <button
+          onClick={() => setShowVideoChat((prev) => !prev)}
+          className="bg-blue-500 text-white px-3 py-2 rounded-lg mt-2"
+        >
+          {showVideoChat ? "Close Video Chat" : "Open Video Chat"}
+        </button>
 
+        {showVideoChat && <VideoChat />}
+      </div>*/}
       {route === "Verification" && (
         <>
           {open && (
