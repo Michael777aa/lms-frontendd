@@ -16,46 +16,43 @@ type Props = {
 };
 
 const ProfileInfo: FC<Props> = ({ avatar, user }) => {
-  const [name, setName] = useState(user && user.name);
+  const [name, setName] = useState(user?.name || "");
   const [updateAvatar, { isSuccess, error }] = useUpdateAvatarMutation();
   const [loadUser, setLoadUser] = useState(false);
   const [editProfile, { isSuccess: success, error: updateError }] =
     useEditProfileMutation();
-  const {} = useLoadUserQuery(undefined, {
-    skip: loadUser ? false : true,
-  });
+  useLoadUserQuery(undefined, { skip: !loadUser });
 
-  const imageHandler = async (e: any) => {
+  const imageHandler = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
     const fileReader = new FileReader();
-
-    fileReader.onload = () => {
+    fileReader.onloadend = () => {
       if (fileReader.readyState === 2) {
-        const avatar = fileReader.result;
-        updateAvatar(avatar);
+        updateAvatar(fileReader.result);
       }
     };
-    fileReader.readAsDataURL(e.target.files[0]);
+    fileReader.readAsDataURL(file);
   };
-  console.log("IMAGE RESULT", avatar);
 
   useEffect(() => {
     if (isSuccess || success) {
       setLoadUser(true);
+      toast.success("Profile updated successfully");
     }
     if (error || updateError) {
-      console.log(error);
-    }
-    if (success) {
-      toast.success("Profile updated successfully");
+      toast.error("Failed to update profile");
+      console.log(error || updateError);
     }
   }, [isSuccess, error, success, updateError]);
 
-  const handleSubmit = async (e: any) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (name !== "") {
-      editProfile({
-        name: name,
-      });
+    if (name.trim() !== "") {
+      editProfile({ name });
+    } else {
+      toast.error("Name cannot be empty");
     }
   };
 
@@ -66,7 +63,7 @@ const ProfileInfo: FC<Props> = ({ avatar, user }) => {
         <h2 className="text-2xl font-semibold text-center text-gray-800 dark:text-white">
           Edit Profile
         </h2>
-        <form className="space-y-6 mt-5">
+        <form className="space-y-6 mt-5" onSubmit={handleSubmit}>
           {/* Full Name */}
           <div>
             <label className="block pb-2 font-medium text-gray-600 dark:text-gray-300">
@@ -99,7 +96,6 @@ const ProfileInfo: FC<Props> = ({ avatar, user }) => {
           <div className="text-center">
             <button
               type="submit"
-              onClick={handleSubmit}
               className="w-full md:w-[250px] h-[50px] bg-gradient-to-r from-blue-500 to-purple-600 text-white font-semibold rounded-full shadow-md hover:shadow-lg transition-transform hover:scale-105"
             >
               Save Changes
@@ -112,7 +108,7 @@ const ProfileInfo: FC<Props> = ({ avatar, user }) => {
       <div className="relative w-[150px] h-[150px]">
         <div className="absolute -top-2 -left-2 w-[160px] h-[160px] rounded-full "></div>
         <Image
-          src={user?.avatar || avatar ? user.avatar.url || avatar : avatarIcon}
+          src={user?.avatar?.url || avatar || avatarIcon}
           alt="User Avatar"
           width={150}
           height={150}
@@ -121,7 +117,7 @@ const ProfileInfo: FC<Props> = ({ avatar, user }) => {
         {/* Camera Icon */}
         <label
           htmlFor="avatar"
-          className="absolute bottom-3 right-3 flex items-center justify-center w-[42px] h-[42px] bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-full shadow-md cursor-pointer transition-transform hover:scale-110 hover:shadow-"
+          className="absolute bottom-3 right-3 flex items-center justify-center w-[42px] h-[42px] bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-full shadow-md cursor-pointer transition-transform hover:scale-110"
         >
           <AiOutlineCamera size={22} />
         </label>
