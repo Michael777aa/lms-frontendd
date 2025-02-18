@@ -2,7 +2,7 @@
 
 import { Box, Button } from "@mui/material";
 import { useTheme } from "next-themes";
-import React, { FC, useEffect, useState } from "react";
+import React, { FC, useState } from "react";
 import { AiOutlineDelete, AiOutlineMail } from "react-icons/ai";
 import { DataGrid } from "@mui/x-data-grid";
 import Loader from "../../Loader/Loader";
@@ -10,6 +10,7 @@ import { format } from "timeago.js";
 import { useGetAllUsersQuery } from "@/app/redux/features/user/userApi";
 import { styles } from "@/app/styles/style";
 import toast from "react-hot-toast";
+
 type Props = {
   isTeam: boolean;
 };
@@ -17,43 +18,13 @@ type Props = {
 const AllUsers: FC<Props> = ({ isTeam }) => {
   const { theme, setTheme } = useTheme();
   const [active, setActive] = useState(false);
-  const [email, setEmail] = useState(""); // Fixed email variable name and initial state
-  const [role, setRole] = useState("admin"); // Fixed role variable name
-  const [open, setOpen] = useState(false); // Fixed open state initialization
-  const [userId, setUserId] = useState(""); // Fixed userId state initialization
+  const [open, setOpen] = useState(false);
+  const [userId, setUserId] = useState("");
   const { isLoading, data, refetch } = useGetAllUsersQuery(
     {},
     { refetchOnMountOrArgChange: true }
   );
-  //   const [updateUserRole, { error: updateError, isSuccess: updateSuccess }] =
-  //     useUpdateUserRoleMutation();
-  //   const { isLoading, data, refetch } = useGetAllUsersQuery(
-  //     {},
-  //     { refetchOnMountOrArgChange: true }
-  //   );
-  //   const [deleteUser, { isSuccess: deleteSuccess, error: deleteError }] =
-  //     useDeleteUserMutation({});
 
-  //   useEffect(() => {
-  //     if (updateError) {
-  //       if ("data" in updateError) {
-  //         const errorMessage = updateError as any;
-  //         toast.error(errorMessage.data.message);
-  //       }
-  //     }
-
-  //     if (updateSuccess) {
-  //       toast.success("User role updated successfully");
-  //       refetch();
-  //       setOpen(false); // Updated setActive to setOpen for consistency
-  //     }
-
-  //     if (deleteSuccess) {
-  //       toast.success("Delete user successfully!");
-  //       refetch();
-  //       setOpen(false); // Close the modal or reset state after successful deletion
-  //     }
-  //   }, [updateError, updateSuccess, deleteSuccess]);
   const columns = [
     { field: "id", headerName: "ID", flex: 0.3 },
     { field: "name", headerName: "Name", flex: 1 },
@@ -68,27 +39,43 @@ const AllUsers: FC<Props> = ({ isTeam }) => {
       flex: 0.2,
       renderCell: (params: any) => {
         return (
-          <Button>
-            <AiOutlineDelete className="dark:text-white text-black" size={20} />
+          <Button
+            variant="contained"
+            color="error"
+            onClick={() => {
+              setOpen(!open);
+              setUserId(params.row.id);
+            }}
+            sx={{
+              "&:hover": { backgroundColor: "#d32f2f" },
+              padding: "6px 12px",
+              borderRadius: "8px",
+            }}
+          >
+            <AiOutlineDelete size={20} />
           </Button>
         );
       },
     },
 
     {
-      field: "  ",
+      field: "email",
       headerName: "Email",
       flex: 0.2,
       renderCell: (params: any) => {
         return (
-          <>
-            <a href={`mailto:${params.row.email}`}>
-              <AiOutlineMail
-                className="dark:text-white text-black mt-[16px]"
-                size={20}
-              />
-            </a>
-          </>
+          <a
+            href={`mailto:${params.row.email}`}
+            style={{ textDecoration: "none" }}
+          >
+            <AiOutlineMail
+              className="dark:text-white text-black mt-[16px]"
+              size={20}
+              style={{
+                transition: "color 0.3s",
+              }}
+            />
+          </a>
         );
       },
     },
@@ -108,7 +95,7 @@ const AllUsers: FC<Props> = ({ isTeam }) => {
           email: item.email,
           role: item.role,
           courses: item.courses.length,
-          created_at: format(item.created_at),
+          created_at: format(item.createdAt),
         });
       });
   } else {
@@ -131,15 +118,6 @@ const AllUsers: FC<Props> = ({ isTeam }) => {
         <Loader />
       ) : (
         <Box m={"20px"}>
-          <div className="w-full flex justify-end">
-            <div
-              className={`${styles.button} !w-[200px] dark:bg-[#57c7a3] !h-[35px] dark:border dark:border-[#ffffff6c]`}
-              onClick={() => setActive(!active)}
-            >
-              Add New Member
-            </div>
-          </div>
-
           <Box
             m="40px 70px 0 0"
             height="80vh"
@@ -167,9 +145,6 @@ const AllUsers: FC<Props> = ({ isTeam }) => {
               "& .MuiDataGrid-cell": {
                 borderBottom: "none",
               },
-              "& .name-column--cell": {
-                color: theme === "dark" ? "#fff" : "#000",
-              },
               "& .MuiDataGrid-columnHeaders": {
                 backgroundColor: theme === "dark" ? "#394396" : "#A4A9FC",
                 borderBottom: "none",
@@ -187,11 +162,28 @@ const AllUsers: FC<Props> = ({ isTeam }) => {
                 color:
                   theme === "dark" ? "#b7ebde !important" : "#000 !important",
               },
-              "& .MuiDataGrid-toolbarContainer .MuiButton-text": {
-                color: "#fff !important",
-              },
             }}
           >
+            <div className="w-full flex justify-end mb-3 ">
+              <Button
+                variant="contained"
+                color="primary"
+                sx={{
+                  backgroundColor: theme === "dark" ? "#57c7a3" : "#3f51b5",
+                  "&:hover": {
+                    backgroundColor: theme === "dark" ? "#45a687" : "#303f9f",
+                  },
+                  padding: "8px 16px",
+                  borderRadius: "30px",
+                  fontWeight: "bold",
+                  fontSize: "14px",
+                  textTransform: "capitalize",
+                }}
+                onClick={() => setActive(!active)}
+              >
+                Add New Member
+              </Button>
+            </div>
             <DataGrid checkboxSelection columns={columns} rows={rows} />
           </Box>
         </Box>

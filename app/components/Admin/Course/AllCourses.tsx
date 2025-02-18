@@ -16,7 +16,6 @@ const AllCourses = (props: Props) => {
   const [open, setOpen] = useState(false);
   const [courseId, setCourseId] = useState("");
   const { isLoading, data, error } = useGetAllCoursesQuery({});
-  const rows: any = [];
 
   const columns = [
     { field: "id", headerName: "ID", flex: 0.5 },
@@ -37,7 +36,7 @@ const AllCourses = (props: Props) => {
       },
     },
     {
-      field: "delete",
+      field: " ",
       headerName: "Delete",
       flex: 0.2,
       renderCell: (params: any) => {
@@ -55,6 +54,8 @@ const AllCourses = (props: Props) => {
     },
   ];
 
+  const rows: any = [];
+
   {
     data &&
       data.courses.forEach((item: any) => {
@@ -63,7 +64,7 @@ const AllCourses = (props: Props) => {
           title: item.name,
           ratings: item.ratings,
           purchased: item.purchased,
-          created_at: format(item.created_at),
+          created_at: format(item.createdAt),
         });
       });
   }
