@@ -2,7 +2,7 @@
 
 import React, { FC, useState } from "react";
 import SideBarProfile from "./SideBarProfile";
-import { useLogOutQuery } from "@/app/redux/features/auth/authApi";
+import { useLogoutQuery } from "@/app/redux/features/auth/authApi";
 import { signOut } from "next-auth/react";
 import ProfileInfo from "./ProfileInfo";
 import ChangePassword from "./ChangePassword";
@@ -17,7 +17,7 @@ const Profile: FC<Props> = ({ user }) => {
   const [active, setActive] = useState(1);
   const [logout, setLogout] = useState(false);
 
-  const {} = useLogOutQuery(undefined, {
+  const {} = useLogoutQuery(undefined, {
     skip: !logout ? true : false,
   });
 

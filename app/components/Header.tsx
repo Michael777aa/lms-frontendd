@@ -14,7 +14,7 @@ import Image from "next/image";
 import avatar from "../public/assets/default-user.png";
 import { useSession } from "next-auth/react";
 import {
-  useLogOutQuery,
+  useLogoutQuery,
   useSocialAuthMutation,
 } from "../redux/features/auth/authApi";
 import toast from "react-hot-toast";
@@ -37,12 +37,7 @@ const Header: FC<Props> = ({ activeItem, setOpen, route, open, setRoute }) => {
   const [logout, setLogout] = useState(false);
   const [showVideoChat, setShowVideoChat] = useState(false);
 
-  useLogOutQuery(undefined, { skip: !logout });
-
-  useEffect(() => {
-    console.log("DATA from NextAuth:", data);
-    console.log("USER from Redux:", user);
-  }, [data, user]);
+  useLogoutQuery(undefined, { skip: !logout });
 
   useEffect(() => {
     if (!user && data) {
@@ -109,9 +104,6 @@ const Header: FC<Props> = ({ activeItem, setOpen, route, open, setRoute }) => {
                     width={30}
                     height={30}
                     className="rounded-full cursor-pointer"
-                    style={{
-                      border: activeItem === 5 ? "2px solid #ffc107" : "",
-                    }}
                   />
                 </Link>
               ) : (

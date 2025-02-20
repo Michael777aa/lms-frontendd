@@ -2,14 +2,19 @@
 
 import { Box, Button } from "@mui/material";
 import { useTheme } from "next-themes";
-import React, { FC, useState } from "react";
+import React, { FC, useEffect, useState } from "react";
 import { AiOutlineDelete, AiOutlineMail } from "react-icons/ai";
 import { DataGrid } from "@mui/x-data-grid";
 import Loader from "../../Loader/Loader";
 import { format } from "timeago.js";
-import { useGetAllUsersQuery } from "@/app/redux/features/user/userApi";
+import {
+  useDeleteUserMutation,
+  useGetAllUsersQuery,
+  useUpdateUserRoleMutation,
+} from "@/app/redux/features/user/userApi";
 import { styles } from "@/app/styles/style";
 import toast from "react-hot-toast";
+import { Modal, Typography } from "@mui/material";
 
 type Props = {
   isTeam: boolean;
@@ -18,15 +23,45 @@ type Props = {
 const AllUsers: FC<Props> = ({ isTeam }) => {
   const { theme, setTheme } = useTheme();
   const [active, setActive] = useState(false);
+  const [email, setEmail] = useState("");
+  const [role, setRole] = useState("admin");
   const [open, setOpen] = useState(false);
   const [userId, setUserId] = useState("");
+
+  const [updateUserRole, { error: updateError, isSuccess }] =
+    useUpdateUserRoleMutation();
   const { isLoading, data, refetch } = useGetAllUsersQuery(
     {},
     { refetchOnMountOrArgChange: true }
   );
+  const [deleteUser, { isSuccess: deleteSuccess, error: deleteError }] =
+    useDeleteUserMutation({});
+
+  console.log("User Id", userId);
+
+  useEffect(() => {
+    if (updateError) {
+      if ("data" in updateError) {
+        const errorMessage = updateError as any;
+        toast.error(errorMessage.data.message);
+      }
+    }
+
+    if (isSuccess) {
+      refetch();
+      toast.success("User role updated successfully");
+      setActive(false);
+    }
+
+    if (deleteSuccess) {
+      refetch();
+      toast.success("User deleted successfully!");
+      setOpen(false);
+    }
+  }, [updateError, isSuccess, deleteSuccess]);
 
   const columns = [
-    { field: "id", headerName: "ID", flex: 0.3 },
+    { field: "id", headerName: "Id", flex: 0.3 },
     { field: "name", headerName: "Name", flex: 1 },
     { field: "email", headerName: "Email", flex: 0.5 },
     { field: "role", headerName: "Role", flex: 0.5 },
@@ -34,7 +69,7 @@ const AllUsers: FC<Props> = ({ isTeam }) => {
     { field: "created_at", headerName: "Joined At", flex: 0.5 },
 
     {
-      field: "delete",
+      field: " ",
       headerName: "Delete",
       flex: 0.2,
       renderCell: (params: any) => {
@@ -59,7 +94,7 @@ const AllUsers: FC<Props> = ({ isTeam }) => {
     },
 
     {
-      field: "email",
+      field: "  ",
       headerName: "Email",
       flex: 0.2,
       renderCell: (params: any) => {
@@ -107,10 +142,15 @@ const AllUsers: FC<Props> = ({ isTeam }) => {
           email: item.email,
           role: item.role,
           courses: item.courses.length,
-          created_at: format(item.created_at),
+          created_at: format(item.createdAt),
         });
       });
   }
+
+  const handleDelete = async () => {
+    const id = userId;
+    await deleteUser(id);
+  };
 
   return (
     <div className="mt-[120px]">
@@ -186,6 +226,42 @@ const AllUsers: FC<Props> = ({ isTeam }) => {
             </div>
             <DataGrid checkboxSelection columns={columns} rows={rows} />
           </Box>
+          {open && (
+            <Modal
+              open={open}
+              onClose={() => setOpen(false)}
+              aria-labelledby="modal-modal-title"
+              aria-describedby="modal-modal-description"
+            >
+              <Box className="absolute top-[50%] left-[50%] -translate-x-1/2 -translate-y-1/2 bg-white p-6 rounded-lg shadow-lg">
+                <Typography
+                  id="modal-modal-title"
+                  variant="h6"
+                  className={`${styles.title}`}
+                >
+                  Are you sure you want to delete this user?
+                </Typography>
+
+                <div className="flex w-full items-center justify-between mt-6">
+                  {/* Cancel Button */}
+                  <Button
+                    className={`${styles.button} !w-[120px] h-[30px] bg-[#57c7a3] text-white`}
+                    onClick={() => setOpen(false)}
+                  >
+                    Cancel
+                  </Button>
+
+                  {/* Delete Button */}
+                  <Button
+                    className={`${styles.button} !w-[120px] h-[30px] bg-[#d63f3f] text-white`}
+                    onClick={handleDelete}
+                  >
+                    Delete
+                  </Button>
+                </div>
+              </Box>
+            </Modal>
+          )}
         </Box>
       )}
     </div>
