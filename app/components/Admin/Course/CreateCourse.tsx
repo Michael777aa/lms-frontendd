@@ -35,6 +35,7 @@ const CreateCourse: React.FC<Props> = (props) => {
     estimatedPrice: "",
     tags: "",
     level: "",
+    categories: "",
     demoUrl: "",
     thumbnail: "",
   });
@@ -46,7 +47,9 @@ const CreateCourse: React.FC<Props> = (props) => {
       videoUrl: "",
       title: "",
       description: "",
+      categories: "",
       videoSection: "Untitled Section",
+      videoLength: "",
       links: [{ title: "", url: "" }],
       suggestion: "",
     },
@@ -67,6 +70,7 @@ const CreateCourse: React.FC<Props> = (props) => {
         videoUrl: courseContent.videoUrl,
         title: courseContent.title,
         description: courseContent.description,
+        videoLength: courseContent.videoLength,
         videoSection: courseContent.videoSection,
         links: courseContent.links.map((link) => ({
           title: link.title,
@@ -85,6 +89,7 @@ const CreateCourse: React.FC<Props> = (props) => {
       estimatedPrice: courseInfo.estimatedPrice,
       tags: courseInfo.tags,
       thumbnail: courseInfo.thumbnail,
+      categories: courseInfo.categories,
       level: courseInfo.level,
       demoUrl: courseInfo.demoUrl,
       totalVideos: courseContentData.length,
@@ -93,6 +98,7 @@ const CreateCourse: React.FC<Props> = (props) => {
       courseData: formattedCourseContentData,
     };
     setCourseData(data);
+    console.log("FETCHED DATA", data);
   };
 
   const handleCourseCreate = async (e: any) => {

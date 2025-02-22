@@ -1,5 +1,6 @@
+import { useGetLayoutByTypeQuery } from "@/app/redux/features/layout/layoutApi";
 import { styles } from "@/app/styles/style";
-import { FC, useState } from "react";
+import { FC, useEffect, useState } from "react";
 
 type Props = {
   courseInfo: any;
@@ -15,6 +16,14 @@ const CourseInformation: FC<Props> = ({
   setActive,
 }) => {
   const [dragging, setDragging] = useState(false);
+  const { data } = useGetLayoutByTypeQuery("Categories");
+  const [categories, setCategories] = useState([]);
+
+  useEffect(() => {
+    if (data) {
+      setCategories(data.layout.categories);
+    }
+  }, [data]);
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -133,21 +142,44 @@ const CourseInformation: FC<Props> = ({
           </div>
         </div>
         <br />
-        <div>
-          <label className={`${styles.label}`}>Course Tags</label>
+        <div className="w-full flex justify-between">
+          <div className="w-[45%]">
+            <label className={`${styles.label}`}>Course Tags</label>
 
-          <input
-            type="text"
-            id="tags"
-            name=""
-            value={courseInfo.tags}
-            onChange={(e) =>
-              setCourseInfo({ ...courseInfo, tags: e.target.value })
-            }
-            className={`${styles.input}`}
-            placeholder="MERN stack LMS platform with next"
-          />
+            <input
+              type="text"
+              id="tags"
+              name=""
+              value={courseInfo.tags}
+              onChange={(e) =>
+                setCourseInfo({ ...courseInfo, tags: e.target.value })
+              }
+              className={`${styles.input}`}
+              placeholder="MERN stack LMS platform with next"
+            />
+          </div>
+          <div className="w-[50%]">
+            <label className={`${styles.label}`}>Course Categories</label>
+
+            <select
+              name=""
+              id=""
+              value={courseInfo.categories}
+              onChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
+                setCourseInfo({ ...courseInfo, categories: e.target.value });
+              }}
+              className={`${styles.input}`}
+            >
+              <option value="">Select Category</option>
+              {categories.map((item: any) => (
+                <option value={item._id} key={item._id}>
+                  {item.title}
+                </option>
+              ))}
+            </select>
+          </div>
         </div>
+
         <br />
         <div className="w-full flex justify-between">
           <div className="w-[45%]">
