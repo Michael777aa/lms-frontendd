@@ -1,10 +1,10 @@
 "use client";
+import Heading from "@/app/utils/Heading";
 import React from "react";
 import AdminSidebar from "../../components/Admin/sidebar/AdminSidebar";
 import DashboardHeader from "../../components/Admin/DashboardHeader";
-import EditHero from "@/app/components/Admin/Customization/EditHero";
-import Heading from "@/app/utils/Heading";
-
+import CourseAnalytics from "@/app/components/Admin/Analytics/CourseAnalytics";
+import UserAnalytics from "@/app/components/Admin/Analytics/UserAnalytics";
 type Props = {
   isTeam: boolean;
 };
@@ -23,7 +23,7 @@ const page = (props: Props) => {
         </div>
         <div className="w-[85%]">
           <DashboardHeader />
-          <EditHero />
+          <UserAnalytics />
         </div>
       </div>
     </div>
