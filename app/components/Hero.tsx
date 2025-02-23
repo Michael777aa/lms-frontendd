@@ -2,17 +2,20 @@ import Image from "next/image";
 import Link from "next/link";
 import React, { FC } from "react";
 import { BiSearch } from "react-icons/bi";
+import { useGetLayoutByTypeQuery } from "../redux/features/layout/layoutApi";
 
 type Props = {};
 
 const Hero: FC<Props> = () => {
+  const { data } = useGetLayoutByTypeQuery("Banner", {});
   return (
     <div className="w-full flex flex-col 1000px:flex-row items-center justify-between bg-gradient-to-b from-[#0c0c1d] to-[#0f0f24] min-h-screen px-6 1000px:px-20 pt-10">
       {/* Left Image Section */}
       <div className="1000px:w-1/2 flex justify-center items-center relative">
         <div className="w-[400px] h-[400px] 1000px:w-[500px] 1000px:h-[500px] bg-[#141432] rounded-full flex items-center justify-center">
           <img
-            src="https://edmy-react.hibootstrap.com/images/banner/banner-img-1.png"
+            src={data?.layout?.banner?.image?.url}
+            style={{ borderRadius: "50px", width: "400px", height: "400px" }}
             alt="Hero Banner"
             className="object-contain w-[90%] h-auto"
           />
@@ -22,17 +25,11 @@ const Hero: FC<Props> = () => {
       {/* Right Content Section */}
       <div className="1000px:w-1/2 flex flex-col items-center 1000px:items-start text-center 1000px:text-left mt-10 1000px:mt-0">
         <h2 className="text-white text-[36px] 1000px:text-[50px] font-bold leading-tight">
-          Improve Your Online Learning Experience Better Instantly
+          {data?.layout?.banner?.title}
         </h2>
 
         <p className="text-gray-400 text-lg mt-4">
-          We have{" "}
-          <span className="text-white font-semibold">40k+ Online courses</span>{" "}
-          &{" "}
-          <span className="text-white font-semibold">
-            500K+ Online registered students
-          </span>
-          . Find your desired courses from them.
+          {data?.layout?.banner?.subTitle}
         </p>
 
         {/* Search Box */}

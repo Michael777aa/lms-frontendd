@@ -13,12 +13,8 @@ import { useSelector } from "react-redux";
 import Image from "next/image";
 import avatar from "../public/assets/default-user.png";
 import { useSession } from "next-auth/react";
-import {
-  useLogoutQuery,
-  useSocialAuthMutation,
-} from "../redux/features/auth/authApi";
+import { useSocialAuthMutation } from "../redux/features/auth/authApi";
 import toast from "react-hot-toast";
-import VideoChat from "./VideoChat";
 
 type Props = {
   open: boolean;
@@ -29,15 +25,10 @@ type Props = {
 };
 
 const Header: FC<Props> = ({ activeItem, setOpen, route, open, setRoute }) => {
-  const [active, setActive] = useState(false);
   const [openSidebar, setOpenSidebar] = useState(false);
   const user = useSelector((state: any) => state.auth.user);
   const { data } = useSession();
   const [socialAuth, { isSuccess }] = useSocialAuthMutation();
-  const [logout, setLogout] = useState(false);
-  const [showVideoChat, setShowVideoChat] = useState(false);
-
-  useLogoutQuery(undefined, { skip: !logout });
 
   useEffect(() => {
     if (!user && data) {
@@ -53,15 +44,6 @@ const Header: FC<Props> = ({ activeItem, setOpen, route, open, setRoute }) => {
     }
   }, [data, user, isSuccess]);
 
-  useEffect(() => {
-    const handleScroll = () => {
-      setActive(window.scrollY > 85);
-    };
-
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
   const handleClose = (e: any) => {
     if (e.target.id === "screen") {
       setOpenSidebar(false);
@@ -71,11 +53,7 @@ const Header: FC<Props> = ({ activeItem, setOpen, route, open, setRoute }) => {
   return (
     <div className="w-full relative">
       <div
-        className={`${
-          active
-            ? "dark:bg-opacity-50 dark:bg-gradient-to-b dark:from-gray-900 dark:to-black fixed top-0 left-0 w-full h-[80px] z-[80] border-b dark:border-[#fffffff1c] shadow-xl transition duration-500"
-            : "w-full border-b dark:border-[#fffffff1c] h-[80px] z-[80] dark:shadow"
-        }`}
+        className={`bg-white fixed top-0 left-0 w-full h-[80px] z-[80] border-b shadow-xl transition duration-500 dark:bg-slate-900 dark:border-[#fffffff1c]`}
       >
         <div className="w-[95%] 800px:w-[92%] m-auto py-2 h-full">
           <div className="w-full h-[80px] flex items-center justify-between">
@@ -104,6 +82,10 @@ const Header: FC<Props> = ({ activeItem, setOpen, route, open, setRoute }) => {
                     width={30}
                     height={30}
                     className="rounded-full cursor-pointer"
+                    style={{
+                      display: "overflow",
+                      border: activeItem === 5 ? "2px solid #ffc107" : "",
+                    }}
                   />
                 </Link>
               ) : (
