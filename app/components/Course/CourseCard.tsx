@@ -12,7 +12,7 @@ type Props = {
 const CourseCard: FC<Props> = ({ item, isProfile }) => {
   return (
     <Link
-      href={isProfile ? `/course/${item._id}` : `/course-access/${item._id}`}
+      href={isProfile ? `/course-access/${item._id}` : `/course/${item._id}`}
     >
       <div className="w-full min-h-[35vh] dark:bg-slate-500 dark:bg-opacity-20 backdrop-blur border dark:border-[#ffffff1d] border-[#00000015] rounded-lg p-4 transition-all duration-300 ease-in-out transform hover:scale-105 hover:shadow-xl">
         <Image
