@@ -85,72 +85,7 @@ const AllInvoices: React.FC<Props> = ({ isDashboard }) => {
     },
   ];
 
-  const rows: any[] = [
-    {
-      id: "1234556777651",
-      userName: "Shahriar Sajeeb",
-      userEmail: "programmershahriarsajeeb@gmail.com",
-      title: "React JS Course",
-      price: "$500",
-      created_at: "2 days ago",
-    },
-    {
-      id: "1234556777652",
-      userName: "John Doe",
-      userEmail: "johndoe@example.com",
-      title: "Node.js Mastery",
-      price: "$450",
-      created_at: "3 days ago",
-    },
-    {
-      id: "1234556777653",
-      userName: "Jane Smith",
-      userEmail: "janesmith@example.com",
-      title: "Full-Stack Development",
-      price: "$600",
-      created_at: "5 days ago",
-    },
-    {
-      id: "1234556777654",
-      userName: "Emily Johnson",
-      userEmail: "emilyjohnson@example.com",
-      title: "JavaScript Advanced",
-      price: "$550",
-      created_at: "1 week ago",
-    },
-    {
-      id: "1234556777655",
-      userName: "Michael Brown",
-      userEmail: "michaelbrown@example.com",
-      title: "Python for Beginners",
-      price: "$400",
-      created_at: "4 days ago",
-    },
-    {
-      id: "1234556777656",
-      userName: "Chris Wilson",
-      userEmail: "chriswilson@example.com",
-      title: "Vue.js Crash Course",
-      price: "$480",
-      created_at: "6 days ago",
-    },
-    {
-      id: "1234556777657",
-      userName: "Sarah Taylor",
-      userEmail: "sarahtaylor@example.com",
-      title: "Django Web Development",
-      price: "$520",
-      created_at: "2 weeks ago",
-    },
-    {
-      id: "1234556777658",
-      userName: "David Martinez",
-      userEmail: "davidmartinez@example.com",
-      title: "TypeScript Essentials",
-      price: "$490",
-      created_at: "5 days ago",
-    },
-  ];
+  const rows: any[] = [];
 
   if (orderData) {
     orderData.forEach((item: any) => {

@@ -20,7 +20,9 @@ import { format } from "timeago.js";
 import { BiMessage } from "react-icons/bi";
 import { VscVerifiedFilled } from "react-icons/vsc";
 import Ratings from "@/app/utils/Ratings";
-
+import socketIO from "socket.io-client";
+const ENDPOINT = process.env.NEXT_PUBLIC_SOCKET_SERVER_URI || "";
+const socketId = socketIO(ENDPOINT, { transports: ["websocket"] });
 type Props = {
   data: any;
   id: string;
@@ -106,12 +108,24 @@ const CourseContentMedia = ({
     if (isSuccess) {
       setQuestion("");
       refetch();
+      socketId.emit("notification", {
+        title: `New Question Received`,
+        message: `You have a new question in ${data[activeVideo].title}`,
+        userId: user._id,
+      });
       toast.success("Question added successfully");
     }
     if (answerSuccess) {
       setAnswer("");
       refetch();
       toast.success("Answer added successfully");
+      if (user.role !== "admin") {
+        socketId.emit("notification", {
+          title: `New Review Received`,
+          message: `You have a new question reply in ${data[activeVideo].title}`,
+          userId: user._id,
+        });
+      }
     }
     if (error) {
       if ("data" in error) {
@@ -129,6 +143,11 @@ const CourseContentMedia = ({
       setReview("");
       setRating(1);
       courseRefetch();
+      socketId.emit("notification", {
+        title: `New Review Received`,
+        message: `You have a new review in ${data[activeVideo].title}`,
+        userId: user._id,
+      });
       toast.success("Review added successfully");
     }
     if (reviewError) {
@@ -318,6 +337,7 @@ const CourseContentMedia = ({
                   data={data}
                   activeVideo={activeVideo}
                   answer={answer}
+                  questionId={questionId}
                   setAnswer={setAnswer}
                   handleAnswerSubmit={handleAnswerSubmit}
                   user={user}
@@ -427,18 +447,19 @@ const CourseContentMedia = ({
                           {format(item?.createdAt)} •
                         </small>
                       </div>
-                      {user.role === "admin" && (
-                        <span
-                          className={`${styles.label} cursor-pointer`}
-                          onClick={() => {
-                            setIsReviewReply(true), setReviewId(item._id);
-                          }}
-                        >
-                          Add Reply
-                        </span>
-                      )}
+                      {user.role === "admin" &&
+                        item.commentReplies.length === 0 && (
+                          <span
+                            className={`${styles.label} cursor-pointer`}
+                            onClick={() => {
+                              setIsReviewReply(true), setReviewId(item._id);
+                            }}
+                          >
+                            Add Reply
+                          </span>
+                        )}
 
-                      {isReviewReply && (
+                      {isReviewReply && reviewId === item._id && (
                         <div className="w-full flex relative">
                           <input
                             type="text"
@@ -506,6 +527,7 @@ const CommentReply = ({
   setQuestionId,
   answerCreatingLoading,
   setAnswer,
+  questionId,
 }: any) => {
   return (
     <>
@@ -521,6 +543,7 @@ const CommentReply = ({
             setQuestionId={setQuestionId}
             handleAnswerSubmit={handleAnswerSubmit}
             answerCreatingLoading={answerCreatingLoading}
+            questionId={questionId}
           />
         ))}
       </div>
@@ -535,6 +558,7 @@ const CommentItem = ({
   handleAnswerSubmit,
   answerCreatingLoading,
   setAnswer,
+  questionId,
 }: any) => {
   const [replyActive, setReplyActive] = useState(false);
   return (
@@ -584,7 +608,7 @@ const CommentItem = ({
           </span>
         </div>
 
-        {replyActive && (
+        {replyActive && questionId === item._id && (
           <>
             {item.questionReplies.map((item: any) => (
               <div className="w-full flex 800px:ml-16 my-5 text-black dark:text-white">
