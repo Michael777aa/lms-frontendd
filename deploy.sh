@@ -1,9 +1,9 @@
 
 
 # PRODUCTION
-# git reset --hard
-# git checkout master
-# git pull origin master
+git reset --hard
+git checkout master
+git pull origin master
 
 
 nmp i yarn -g
