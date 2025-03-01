@@ -1,5 +1,3 @@
-"use client";
-
 import Link from "next/link";
 import React, { FC, useEffect, useState } from "react";
 import NavItems from "../utils/NavItems";
@@ -38,12 +36,13 @@ const Header: FC<Props> = ({ activeItem, setOpen, route, open, setRoute }) => {
 
   useEffect(() => {
     if (!isLoading && !userData && data?.user?.email) {
+      // If the user doesn't exist in your system, trigger socialAuth to register
       socialAuth({
         email: data?.user?.email,
         name: data?.user?.name,
         avatar: data?.user?.image,
       });
-      refetch();
+      refetch(); // Refresh user data after auth
     }
     if (data && isSuccess) {
       toast.success("Login successfully");
