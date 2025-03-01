@@ -1,9 +1,9 @@
-import { useGetUsersAllCoursesQuery } from "@/app/redux/features/courses/coursesApi";
 import React, { useEffect, useState } from "react";
 import CourseCard from "../Course/CourseCard";
+import { useGetAllCoursesQuery } from "@/app/redux/features/courses/coursesApi";
 
 const Courses = () => {
-  const { data } = useGetUsersAllCoursesQuery({});
+  const { data } = useGetAllCoursesQuery({});
   const [courses, setCourses] = useState<any[]>([]);
   useEffect(() => {
     setCourses(data?.courses);

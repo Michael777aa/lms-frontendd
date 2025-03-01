@@ -7,6 +7,7 @@ import { FC, useEffect, useState } from "react";
 import { MdNotificationsNone } from "react-icons/md"; // Corrected icon import
 import socketIO from "socket.io-client";
 import { format } from "timeago.js";
+
 const ENDPOINT = process.env.NEXT_PUBLIC_SOCKET_SERVER_URI || "";
 const socketId = socketIO(ENDPOINT, { transports: ["websocket"] });
 type Props = {
@@ -22,12 +23,6 @@ const DashboardHeader: FC<Props> = ({ open, setOpen }) => {
   const [updateNotificationstatus, { isSuccess }] =
     useUpdateNotificationStatusMutation();
   const [notifications, setNotifications] = useState<any>([]);
-  const [audio] = useState(
-    new Audio("https://www.fesliyanstudios.com/play-mp3/4385")
-  );
-  const playNotificationSound = () => {
-    audio.play();
-  };
 
   useEffect(() => {
     if (data) {
@@ -38,13 +33,11 @@ const DashboardHeader: FC<Props> = ({ open, setOpen }) => {
     if (isSuccess) {
       refetch();
     }
-    audio.load();
   }, [data, isSuccess]);
 
   useEffect(() => {
     socketId.on("newNotification", (data: any) => {
       refetch();
-      playNotificationSound();
     });
   }, []);
 

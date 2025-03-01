@@ -2,12 +2,12 @@
 
 import React, { FC, useEffect, useState } from "react";
 import SideBarProfile from "./SideBarProfile";
-import { useLogoutQuery } from "@/app/redux/features/auth/authApi";
 import { signOut } from "next-auth/react";
 import ProfileInfo from "./ProfileInfo";
 import ChangePassword from "./ChangePassword";
-import { useGetUsersAllCoursesQuery } from "@/app/redux/features/courses/coursesApi";
 import CourseCard from "../Course/CourseCard";
+import { useLogOutQuery } from "@/app/redux/features/auth/authApi";
+import { useGetAllCoursesQuery } from "@/app/redux/features/courses/coursesApi";
 
 type Props = {
   user: any;
@@ -18,9 +18,9 @@ const Profile: FC<Props> = ({ user }) => {
   const [avatar, setAvatar] = useState(null);
   const [active, setActive] = useState(1);
   const [logout, setLogout] = useState(false);
-  const { data } = useGetUsersAllCoursesQuery(undefined, {});
+  const { data } = useGetAllCoursesQuery(undefined, {});
   const [courses, setCourses] = useState([]);
-  const {} = useLogoutQuery(undefined, {
+  const {} = useLogOutQuery(undefined, {
     skip: !logout ? true : false,
   });
 

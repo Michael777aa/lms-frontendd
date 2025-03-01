@@ -17,7 +17,7 @@ import { styles } from "@/app/styles/style";
 import toast from "react-hot-toast";
 
 const AllCourses = () => {
-  const { theme, setTheme } = useTheme();
+  const { theme } = useTheme();
   const [open, setOpen] = useState(false);
   const [courseId, setCourseId] = useState("");
   const { isLoading, data, refetch } = useGetAllCoursesQuery(

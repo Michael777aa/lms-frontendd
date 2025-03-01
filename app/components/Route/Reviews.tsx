@@ -2,7 +2,7 @@ import React from "react";
 import Image from "next/image";
 import { styles } from "@/app/styles/style";
 import ReviewCard from "../Review/ReviewCard";
-
+import ImageHigh from "../../public/assets/imagehigh.avif";
 const reviews = [
   {
     name: "Gene Bates",
@@ -43,7 +43,7 @@ const Reviews = () => {
         {/* Left Side - Image */}
         <div className="800px:w-[50%] w-full">
           <Image
-            src={require("../../public/assets/imagehigh.avif")}
+            src={ImageHigh}
             alt="business"
             width={700}
             height={700}

@@ -9,9 +9,7 @@ import { AiOutlineDelete } from "react-icons/ai";
 import toast from "react-hot-toast";
 import { IoMdAddCircleOutline } from "react-icons/io";
 
-type Props = {};
-
-const EditCategories = (props: Props) => {
+const EditCategories = () => {
   const { data, refetch } = useGetLayoutByTypeQuery("Categories", {
     refetchOnMountOrArgChange: true,
   });

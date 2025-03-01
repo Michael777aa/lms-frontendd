@@ -6,11 +6,10 @@ type RegistrationResponse = {
   activationToken: string;
 };
 
-type RegistrationData = {};
+type RegistrationData = Record<string, unknown>; // Changed {} to Record<string, unknown>
 
-export const authApi = apiSlice.injectEndpoints({
+export const AuthApi = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
-    // endpoints here
     register: builder.mutation<RegistrationResponse, RegistrationData>({
       query: (data) => ({
         url: "/user/registration",
@@ -21,6 +20,7 @@ export const authApi = apiSlice.injectEndpoints({
       async onQueryStarted(arg, { queryFulfilled, dispatch }) {
         try {
           const result = await queryFulfilled;
+          // Dispatch the action directly instead of using the hook
           dispatch(
             useRegistration({
               token: result.data.activationToken,
@@ -92,7 +92,7 @@ export const authApi = apiSlice.injectEndpoints({
         }
       },
     }),
-    logout: builder.query({
+    logOut: builder.query({
       query: () => ({
         url: "/user/logout",
         method: "GET",
@@ -115,5 +115,5 @@ export const {
   useActivationMutation,
   useLoginMutation,
   useSocialAuthMutation,
-  useLogoutQuery,
-} = authApi;
+  useLogOutQuery,
+} = AuthApi;
