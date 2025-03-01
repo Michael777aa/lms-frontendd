@@ -15,9 +15,9 @@ const Ratings: FC<Props> = ({ rating }) => {
       stars.push(
         <AiFillStar
           key={i}
-          size={20}
-          color="#f6b100"
-          className="mr-2 cursor-pointer"
+          size={18} // Adjusted size
+          color="#ffd700" // Golden color
+          className="mr-1 cursor-pointer hover:text-yellow-500 transition-colors duration-300"
         />
       );
     } else if (i === Math.ceil(rating) && !Number.isInteger(rating)) {
@@ -25,9 +25,9 @@ const Ratings: FC<Props> = ({ rating }) => {
       stars.push(
         <BsStarHalf
           key={i}
-          size={17}
-          color="#f6ba00"
-          className="mr-2 cursor-pointer"
+          size={18} // Adjusted size
+          color="#ffd700" // Golden color
+          className="mr-1 cursor-pointer hover:text-yellow-500 transition-colors duration-300"
         />
       );
     } else {
@@ -35,15 +35,15 @@ const Ratings: FC<Props> = ({ rating }) => {
       stars.push(
         <AiOutlineStar
           key={i}
-          size={20}
-          color="#f6ba00"
-          className="mr-2 cursor-pointer"
+          size={18} // Adjusted size
+          color="#dcdcdc" // Light gray color for empty stars
+          className="mr-1 cursor-pointer hover:text-yellow-500 transition-colors duration-300"
         />
       );
     }
   }
 
-  return <div className="flex mt-1 ml-2 800px:mt-0 800px:ml-0">{stars}</div>;
+  return <div className="flex mt-1">{stars}</div>;
 };
 
 export default Ratings;

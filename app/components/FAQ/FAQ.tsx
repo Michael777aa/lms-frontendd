@@ -5,62 +5,59 @@ import { HiMinus, HiPlus } from "react-icons/hi";
 
 const FAQ = () => {
   const { data } = useGetLayoutByTypeQuery("FAQ", {});
-  const [activeQuestion, setActiveQuestion] = useState(null);
+  const [activeQuestion, setActiveQuestion] = useState<number | null>(null); // Changed to number | null for index type
   const [questions, setQuestions] = useState<any[]>([]);
 
   useEffect(() => {
     if (data) {
-      setQuestions(data?.layout?.faq);
+      setQuestions(data?.layout?.faq); // Load FAQ data from the API response
     }
   }, [data]);
 
-  const toggleQuestion = (id: any) => {
-    setActiveQuestion(activeQuestion === id ? null : id);
+  // Function to toggle a question by index
+  const toggleQuestion = (index: number) => {
+    setActiveQuestion((prev) => (prev === index ? null : index)); // Only toggle one question
   };
 
   return (
-    <div>
-      <div className="w-[90%] 800px:w-[80%] m-auto">
-        <h1 className={`${styles.title} 800px:text-[40px]`}>
-          Frequently Asked Questions
-        </h1>
-        <div className="mt-12">
-          <dl className="space-y-8">
-            {questions.map((q: any) => (
-              <div
-                key={q.id}
-                className={`${
-                  q._id !== questions[0]?._id && "border-t"
-                } border-gray-200 pt-6`}
-              >
-                <dt className="text-lg">
-                  <button
-                    className="flex items-start justify-between w-full text-left focus:outline-none"
-                    onClick={() => toggleQuestion(q._id)}
-                  >
-                    <span className="font-medium text-black dark:text-white">
-                      {q.question}
-                    </span>
-                    <span className="ml-6 flex-shrink-0">
-                      {activeQuestion === q._id ? (
-                        <HiMinus className="h-6 w-6 text-black dark:text-white" />
-                      ) : (
-                        <HiPlus className="h-6 w-6 text-black dark:text-white" />
-                      )}
-                    </span>
-                  </button>
-                  {activeQuestion === q._id && (
-                    <dd className="mt-2 pr-12">
-                      <p className="text-base font-Poppins text-black dark:text-white">
-                        {q.answer}
-                      </p>
-                    </dd>
-                  )}
-                </dt>
-              </div>
-            ))}
-          </dl>
-        </div>
+    <div className="w-full max-w-4xl pb-5 mx-auto mt-32">
+      <h1
+        className={`${styles.title} text-3xl sm:text-4xl font-semibold text-center`}
+      >
+        Frequently Asked Questions
+      </h1>
+      <div className="mt-10">
+        <dl className="space-y-6">
+          {questions.map((q, index) => (
+            <div
+              key={index} // Using index as the unique key
+              className={`${index !== 0 && "border-t"} border-gray-300 pt-6`}
+            >
+              <dt className="text-xl">
+                <button
+                  className="flex items-center justify-between w-full text-left text-gray-800 dark:text-white hover:text-yellow-500 focus:outline-none transition-all duration-300"
+                  onClick={() => toggleQuestion(index)} // Toggle by question index
+                >
+                  <span className="font-medium">{q.question}</span>
+                  <span className="ml-4 flex-shrink-0">
+                    {activeQuestion === index ? (
+                      <HiMinus className="h-6 w-6 text-gray-800 dark:text-white" />
+                    ) : (
+                      <HiPlus className="h-6 w-6 text-gray-800 dark:text-white" />
+                    )}
+                  </span>
+                </button>
+              </dt>
+              {activeQuestion === index && (
+                <dd className="mt-2 px-4 py-2 bg-gray-50 dark:bg-gray-800 rounded-md shadow-md">
+                  <p className="text-base text-gray-700 dark:text-gray-300">
+                    {q.answer}
+                  </p>
+                </dd>
+              )}
+            </div>
+          ))}
+        </dl>
       </div>
     </div>
   );

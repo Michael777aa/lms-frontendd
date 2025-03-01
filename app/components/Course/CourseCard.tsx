@@ -14,17 +14,18 @@ const CourseCard: FC<Props> = ({ item, isProfile }) => {
     <Link
       href={isProfile ? `/course-access/${item._id}` : `/course/${item._id}`}
     >
-      <div className="w-full min-h-[35vh] dark:bg-slate-500 dark:bg-opacity-20 backdrop-blur border dark:border-[#ffffff1d] border-[#00000015] rounded-lg p-4 transition-all duration-300 ease-in-out transform hover:scale-105 hover:shadow-xl">
-        <Image
-          src={item?.thumbnail?.url}
-          width={500}
-          height={300}
-          style={{ objectFit: "cover" }}
-          className="rounded-lg w-full"
-          alt={item.name || "Course Thumbnail"}
-        />
+      <div className="w-full min-h-[30vh] dark:bg-slate-800 backdrop-blur border dark:border-[#ffffff1d] border-[#00000015] rounded-lg p-4 transition-all duration-300 ease-in-out transform  hover:shadow-xl shadow-lg bg-white dark:bg-[#2A2A2A]">
+        <div className="relative w-full h-60">
+          <Image
+            src={item?.thumbnail?.url}
+            alt={item.name || "Course Thumbnail"}
+            layout="fill"
+            objectFit="cover"
+            className="rounded-lg"
+          />
+        </div>
 
-        <h1 className="font-Poppins text-lg sm:text-lg font-semibold text-black dark:text-white mt-3 line-clamp-2">
+        <h1 className="font-Poppins text-lg sm:text-lg font-semibold text-gray-900 dark:text-white mt-4 mb-2 line-clamp-2">
           {item.name}
         </h1>
 
@@ -32,7 +33,7 @@ const CourseCard: FC<Props> = ({ item, isProfile }) => {
           <Ratings rating={item.ratings} />
 
           <h5
-            className={`text-sm sm:text-sm text-black dark:text-white ${
+            className={`text-sm sm:text-sm text-gray-600 dark:text-gray-300 ${
               isProfile ? "hidden 800px:inline" : ""
             }`}
           >
@@ -42,18 +43,18 @@ const CourseCard: FC<Props> = ({ item, isProfile }) => {
 
         <div className="w-full flex items-center justify-between pt-3">
           <div className="flex items-center">
-            <h3 className="text-lg font-semibold text-black dark:text-white">
+            <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
               {item.price === 0 ? "Free" : `${item.price}$`}
             </h3>
             {item.estimatedPrice && (
-              <h5 className="pl-3 text-sm mt-[5px] line-through opacity-70 text-black dark:text-white">
+              <h5 className="pl-3 text-sm mt-[5px] line-through opacity-70 text-gray-500 dark:text-gray-400">
                 {item.estimatedPrice}$
               </h5>
             )}
           </div>
           <div className="flex items-center pb-3">
             <AiOutlineUnorderedList size={20} fill="#fff" />
-            <h5 className="pl-2 text-sm sm:text-sm text-black dark:text-white">
+            <h5 className="pl-2 text-sm sm:text-sm text-gray-600 dark:text-gray-300">
               {item.courseData?.length} Lectures
             </h5>
           </div>

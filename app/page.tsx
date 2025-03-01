@@ -16,9 +16,9 @@ const Page = () => {
   return (
     <div>
       <Heading
-        title="ELearning"
-        description="this is platform for student to develop"
-        keywords="programming ai machine learning"
+        title="LearnEra"
+        description="LearnEra is an innovative platform designed to empower students with the skills needed for the future. Offering courses in programming, AI, and machine learning, it provides a comprehensive learning experience for tech enthusiasts aiming to excel in their careers"
+        keywords="online learning, programming courses, AI training, machine learning education, tech skills, future-proof education, student development, coding tutorials"
       />
       <Header
         open={open}

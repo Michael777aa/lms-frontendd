@@ -58,43 +58,40 @@ const Header: FC<Props> = ({ activeItem, setOpen, route, open, setRoute }) => {
 
   return (
     <div className="w-full relative">
-      <div className="bg-white fixed top-0 left-0 w-full h-[80px] z-[80] border-b shadow-xl transition duration-500 dark:bg-slate-900 dark:border-[#fffffff1c]">
-        <div className="w-[95%] 800px:w-[92%] m-auto py-2 h-full">
+      <div className="bg-white fixed top-0 left-0 w-full h-[80px] z-[80] border-b shadow-lg transition duration-300 dark:bg-slate-900 dark:border-[#fffffff1c]">
+        <div className="w-[95%] 800px:w-[92%] m-auto py-3 h-full">
           <div className="w-full h-[80px] flex items-center justify-between">
             <Link
               href="/"
-              className="text-[25px] font-Poppins font-[500] text-black dark:text-white"
+              className="text-[30px] font-Poppins font-[600] text-blue-600 dark:text-white"
             >
-              ELearning
+              LearnEra
             </Link>
-            <div className="flex items-center">
+            <div className="flex items-center space-x-6">
               <NavItems activeItem={activeItem} isMobile={false} />
               <ThemeSwitcher />
-              {/* Mobile Menu */}
+              {/* Mobile Menu Icon */}
               <div className="800px:hidden">
                 <HiOutlineMenuAlt3
-                  size={25}
+                  size={30}
                   className="cursor-pointer dark:text-white text-black"
                   onClick={() => setIsSidebarOpen(true)}
                 />
               </div>
+              {/* User Profile */}
               {user ? (
                 <Link href="/profile">
                   <Image
                     src={user?.avatar?.url || avatar}
                     alt="User Avatar"
-                    width={30}
-                    height={30}
-                    className="rounded-full cursor-pointer"
-                    style={{
-                      display: "overflow",
-                      border: activeItem === 5 ? "2px solid #ffc107" : "",
-                    }}
+                    width={40}
+                    height={40}
+                    className="rounded-full cursor-pointer border-2 border-transparent hover:border-blue-600 transition-all"
                   />
                 </Link>
               ) : (
                 <HiOutlineUserCircle
-                  size={25}
+                  size={30}
                   className="hidden 800px:block cursor-pointer dark:text-white text-black"
                   onClick={() => setOpen(true)}
                 />
@@ -106,19 +103,26 @@ const Header: FC<Props> = ({ activeItem, setOpen, route, open, setRoute }) => {
         {/* Mobile Sidebar */}
         {isSidebarOpen && (
           <div
-            className="fixed w-full h-screen top-0 left-0 z-[99999] dark:bg-[unset] bg-[#00000024]"
+            className="fixed w-full h-screen top-0 left-0 z-[99999] dark:bg-[unset] bg-[#00000040] transition-all ease-in-out duration-300"
             onClick={handleCloseSidebar}
             id="screen"
           >
-            <div className="w-[70%] fixed z-[999999999] h-screen bg-white dark:bg-slate-900 dark:bg-opacity-90 top-0 right-0">
+            <div className="w-[70%] fixed z-[999999999] h-screen bg-white dark:bg-slate-900 dark:bg-opacity-90 top-0 right-0 transform transition-transform ease-in-out duration-300">
+              <div className="flex justify-end p-4">
+                <HiOutlineMenuAlt3
+                  size={30}
+                  className="cursor-pointer text-black dark:text-white"
+                  onClick={() => setIsSidebarOpen(false)}
+                />
+              </div>
               <NavItems activeItem={activeItem} isMobile={true} />
               <HiOutlineUserCircle
-                size={25}
+                size={30}
                 className="cursor-pointer ml-5 my-2 text-black dark:text-white"
                 onClick={() => setOpen(true)}
               />
               <p className="text-[16px] px-2 pl-5 text-black dark:text-white">
-                Copyright 2025 ELearning
+                Copyright 2025 LearnEra
               </p>
             </div>
           </div>

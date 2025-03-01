@@ -9,28 +9,42 @@ const reviews = [
     avatar: "https://randomuser.me/api/portraits/men/1.jpg",
     profession: "Student | Cambridge University",
     comment:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quidem.",
+      "This experience was truly transformative. It helped me grow as a person, taught me patience, and opened my mind to new possibilities. I am grateful for the journey.",
   },
   {
     name: "Verna Santos",
     avatar: "https://randomuser.me/api/portraits/women/1.jpg",
-    profession: "Full Stack Developer | Quarter Ltd.",
+    profession: "Marketing Specialist | Quarter Ltd.",
     comment:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quidem.",
+      "Ive learned so much about myself. The personal growth Ive experienced has made me feel more grounded and confident. Its been a rewarding journey.",
   },
   {
     name: "Jay Gibbs",
     avatar: "https://randomuser.me/api/portraits/men/2.jpg",
-    profession: "Computer Systems Engineering Student | Zimbabwe",
+    profession: "Travel Blogger | Zimbabwe",
     comment:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quidem.",
+      "This has been an amazing experience. It gave me a new perspective on life and encouraged me to push myself further. I feel more motivated and excited for the future.",
   },
   {
     name: "Mina Davidson",
     avatar: "https://randomuser.me/api/portraits/women/2.jpg",
-    profession: "Junior Web Developer | Indonesia",
+    profession: "Creative Director | Indonesia",
     comment:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quidem.",
+      "I cant express how much this experience has impacted me. I feel more focused and driven than ever. Ive learned that growth doesnt always come easy, but its always worth it.",
+  },
+  {
+    name: "Liam Johnson",
+    avatar: "https://randomuser.me/api/portraits/men/3.jpg",
+    profession: "Photographer | New York",
+    comment:
+      "A real eye-opener. It taught me the importance of stepping out of my comfort zone and embracing change. Ive grown so much, and Im more excited for whats next.",
+  },
+  {
+    name: "Olivia Brown",
+    avatar: "https://randomuser.me/api/portraits/women/3.jpg",
+    profession: "Chef | London",
+    comment:
+      "This experience has been a great reminder that we are always evolving. Ive learned to embrace challenges and stay positive, no matter what comes my way.",
   },
 ];
 
@@ -55,17 +69,16 @@ const Reviews = () => {
           <h3
             className={`${styles.title} text-2xl sm:text-3xl lg:text-4xl font-semibold text-black dark:text-white leading-tight 800px:!text-[30px]`}
           >
-            Our Students Are <span className="text-gradient">Our Strength</span>
-            <br />
-            See What They Say About Us
+            Your Future Begins Today
           </h3>
           <p
             className={`${styles.label} text-base sm:text-lg mt-4 text-gray-700 dark:text-gray-300`}
           >
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque unde
-            voluptatum dignissimos, nulla perferendis dolorem voluptate nemo
-            possimus magni deleniti natus accusamus officiis quasi nihil
-            commodi, praesentium quidem, quis doloribus?
+            "Every journey begins with a single step, and every small effort
+            adds up to great achievements. You have the potential to transform
+            your dreams into reality, and today is the perfect day to start. No
+            matter where you are or where you have been, your path is yours to
+            shape. Keep pushing forward, and success will follow."
           </p>
         </div>
       </div>
