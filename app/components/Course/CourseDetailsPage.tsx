@@ -48,8 +48,8 @@ const CourseDetailsPage = ({ id }: Props) => {
       ) : (
         <div style={{ position: "relative", top: "100px" }}>
           <Heading
-            title={`${data?.course?.name} - ELearning`}
-            description="ELearning is a programming "
+            title={`${data?.course?.name} - LearnEra`}
+            description="LearnEra is a programming "
             keywords={data?.course?.tags}
           />
           <Header

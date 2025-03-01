@@ -1,85 +1,96 @@
 const About = () => {
   return (
-    <div className="w-full py-20 bg-gradient-to-b from-blue-50 to-white">
+    <div className="w-full py-20 top-[50px] mb-[50px] relative bg-gradient-to-b from-gray-800 to-black dark:from-gray-900 dark:to-black light:bg-gradient-to-b from-gray-100 to-white">
       <div className="w-[90%] md:w-[80%] lg:w-[70%] m-auto text-center">
         {/* Header */}
-        <h1 className="text-[32px] md:text-[42px] lg:text-[50px] font-bold leading-tight text-gray-900">
-          Welcome to <span className="text-blue-600">eLearning</span> Where
-          Knowledge Meets Innovation!
+        <h1 className="text-[32px] md:text-[42px] lg:text-[50px] font-extrabold leading-tight text-transparent bg-clip-text bg-gradient-to-r from-pink-500 to-yellow-400 dark:text-white">
+          Welcome to <span className="text-teal-400">LearnEra</span> - Your
+          Gateway to Success!
         </h1>
-        <p className="mt-4 text-lg text-gray-700">
-          Are you ready to **transform your skills** and unlock endless
-          opportunities?
-          <span className="font-semibold text-blue-500">eLearning</span> is
-          designed for individuals who seek to learn, grow, and excel in the
-          digital world.
+        <p className="mt-4 text-lg text-dark-900 dark:text-gray-100">
+          Ready to **transform your career**?{" "}
+          <span className="font-semibold text-teal-400">LearnEra</span> brings
+          innovative courses that help you unlock your potential and build your
+          future.
         </p>
 
         {/* Main Content Box */}
-        <div className="mt-10 bg-white shadow-lg rounded-lg p-6 md:p-10 text-left">
-          <h2 className="text-2xl font-semibold text-blue-600">
-            Why Choose eLearning?
+        <div className="mt-10 bg-gray-800 dark:bg-gray-900 light:bg-white shadow-xl rounded-lg p-6 md:p-10 text-left text-gray-100 dark:text-gray-100">
+          <h2 className="text-2xl font-bold text-teal-400 dark:text-teal-300">
+            Why Choose{" "}
+            <span className="text-teal-300 dark:text-teal-200">LearnEra</span>?
           </h2>
-          <p className="mt-4 text-lg text-gray-800 leading-relaxed">
-            In todays fast-paced world, **learning should be accessible,
-            engaging, and effective**. Thats why we created{" "}
-            <span className="font-semibold text-blue-500">eLearning</span>, a
-            platform that provides **high-quality education** through
-            interactive courses, expert-led tutorials, and hands-on projects.
+          <p className="mt-4 text-lg text-gray-400 leading-relaxed dark:text-gray-200">
+            In the fast-evolving world, **learning should be engaging, flexible,
+            and impactful**. That's why we created{" "}
+            <span className="font-semibold text-teal-300 dark:text-teal-200">
+              LearnEra
+            </span>
+            , a platform that offers **interactive courses**, expert guidance,
+            and real-world projects to keep you ahead.
           </p>
 
           <br />
 
-          <h2 className="text-2xl font-semibold text-blue-600">
-            What Makes Us Different?
+          <h2 className="text-2xl font-bold text-teal-400 dark:text-teal-300">
+            What Sets Us Apart?
           </h2>
-          <p className="mt-4 text-lg text-gray-800 leading-relaxed">
-            ✅ **Comprehensive Course Library** From **beginner** to
-            **advanced**, we offer structured lessons in programming, design,
-            business, and more. ✅ **Hands-On Learning** Learn by doing! Our
-            courses include **real-world projects** and coding exercises. ✅
-            **Expert Mentorship** Gain insights and support from **industry
-            professionals** with years of experience. ✅ **Flexible Learning
-            Paths** Study at your own pace with 24/7 access to all materials. ✅
-            **Global Community**Connect with learners worldwide and share
-            knowledge.
+          <p className="mt-4 text-lg text-gray-400 leading-relaxed dark:text-gray-200">
+            ✅ **Comprehensive Course Library** Learn from beginner to advanced,
+            covering programming, business, design, and more. <br />
+            ✅ **Hands-On Experience** Our courses provide **real-world
+            challenges** to ensure practical knowledge. <br />
+            ✅ **Expert Guidance** Get personalized feedback from industry
+            professionals with years of experience. <br />
+            ✅ **Flexibility** Study at your own pace, available 24/7. <br />✅
+            **Global Network** Join a worldwide community of learners.
           </p>
 
           <br />
 
-          <h2 className="text-2xl font-semibold text-blue-600">Our Mission</h2>
-          <p className="mt-4 text-lg text-gray-800 leading-relaxed">
-            Our goal is to **empower learners** with the tools they need to
-            succeed in their careers. Whether you're a **student, a working
-            professional, or a self-learner**,
-            <span className="font-semibold text-blue-500">eLearning</span>{" "}
-            provides the right resources to help you achieve your dreams.
+          <h2 className="text-2xl font-bold text-teal-400 dark:text-teal-300">
+            Our Mission
+          </h2>
+          <p className="mt-4 text-lg text-gray-400 leading-relaxed dark:text-gray-200">
+            At{" "}
+            <span className="font-semibold text-teal-300 dark:text-teal-200">
+              LearnEra
+            </span>
+            , we are committed to empowering individuals to achieve their dreams
+            by providing access to cutting-edge learning resources. Whether
+            you're a student, professional, or aspiring expert, we are here to
+            help you succeed.
           </p>
 
           <br />
 
-          <h2 className="text-2xl font-semibold text-blue-600">
-            What Youll Learn
+          <h2 className="text-2xl font-bold text-teal-400 dark:text-teal-300">
+            What You'll Gain
           </h2>
-          <p className="mt-4 text-lg text-gray-800 leading-relaxed">
-            🎥 **Engaging Video Lessons** Step-by-step tutorials by top
-            instructors. 💻 **Interactive Coding Challenges** Apply what you
-            learn through live coding exercises. 📝 **Quizzes & Certifications**
-            Track your progress and earn industry-recognized certificates. 🤝
-            **Collaboration & Networking** Join study groups and interact with
-            like-minded learners.
+          <p className="mt-4 text-lg text-gray-400 leading-relaxed dark:text-gray-200">
+            🎥 **Interactive Video Lessons** Learn from experienced instructors
+            with detailed video guides. <br />
+            💻 **Real-Life Coding Exercises** Challenge yourself with coding
+            tasks designed to hone your skills. <br />
+            📝 **Quizzes & Certifications** Assess your knowledge and earn
+            valuable certificates recognized globally. <br />
+            🤝 **Collaboration** Connect with peers, form study groups, and grow
+            together in a global community.
           </p>
 
           <br />
 
-          <h2 className="text-2xl font-semibold text-blue-600">
-            Join Us Today!
+          <h2 className="text-2xl font-bold text-teal-400 dark:text-teal-300">
+            Join Us Today
           </h2>
-          <p className="mt-4 text-lg text-gray-800 leading-relaxed">
-            The **future of education is digital**, and
-            wNsAAAAAAAAAAAAAAAAABXeq1mup4kT19Jb6rEQvtblvQ6lx92JXf here to guide
-            you every step of the way. Take control of your learning journey,
-            build your expertise, and **turn your passion into a profession**.
+          <p className="mt-4 text-lg text-gray-400 leading-relaxed dark:text-gray-200">
+            **The future of learning is digital**, and{" "}
+            <span className="font-semibold text-teal-300 dark:text-teal-200">
+              LearnEra
+            </span>{" "}
+            is here to guide you every step of the way. Unlock your potential,
+            gain valuable skills, and turn your passions into a fulfilling
+            career.
           </p>
         </div>
 
@@ -87,7 +98,7 @@ const About = () => {
         <div className="mt-10">
           <a
             href="/courses"
-            className="px-6 py-3 bg-blue-600 text-white text-lg font-semibold rounded-full shadow-lg hover:bg-blue-700 transition-all"
+            className="px-6 py-3 bg-teal-500 text-white text-lg font-semibold rounded-full shadow-xl hover:bg-teal-600 transition-all"
           >
             Start Learning Now
           </a>

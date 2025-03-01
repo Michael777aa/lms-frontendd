@@ -113,7 +113,7 @@ const Footer = () => {
         {/* Footer Copyright */}
         <div className="mt-12 text-center">
           <p className="text-sm text-gray-400">
-            &copy; 2023 ELearning | All Rights Reserved
+            &copy; 2025 LearnEra | All Rights Reserved
           </p>
         </div>
       </div>

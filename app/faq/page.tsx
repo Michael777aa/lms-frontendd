@@ -27,6 +27,8 @@ const Page = () => {
       />
       <br />
       <FAQ />
+      <br />
+      <br />
       <Footer />
     </div>
   );
