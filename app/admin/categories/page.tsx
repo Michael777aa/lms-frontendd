@@ -4,11 +4,8 @@ import React from "react";
 import AdminSidebar from "../../components/Admin/sidebar/AdminSidebar";
 import DashboardHeader from "../../components/Admin/DashboardHeader";
 import EditCategories from "@/app/components/Admin/Customization/EditCategories";
-type Props = {
-  isTeam: boolean;
-};
 
-const page = (props: Props) => {
+const Page = () => {
   return (
     <div>
       <Heading
@@ -29,4 +26,4 @@ const page = (props: Props) => {
   );
 };
 
-export default page;
+export default Page;

@@ -5,9 +5,7 @@ import AdminSidebar from "../../components/Admin/sidebar/AdminSidebar";
 import DashboardHeader from "../../components/Admin/DashboardHeader";
 import AllUsers from "@/app/components/Admin/Users/AllUsers";
 
-type Props = {};
-
-const page = (props: Props) => {
+const Page = () => {
   return (
     <div>
       <Heading
@@ -28,4 +26,4 @@ const page = (props: Props) => {
   );
 };
 
-export default page;
+export default Page;

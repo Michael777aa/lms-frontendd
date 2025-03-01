@@ -4,7 +4,6 @@ import Ratings from "@/app/utils/Ratings";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import { IoCheckmarkDoneOutline, IoCloseOutline } from "react-icons/io5";
-import { useSelector } from "react-redux";
 import { format } from "timeago.js";
 import CourseContentList from "../Course/CourseContentList";
 import { Elements } from "@stripe/react-stripe-js";
@@ -30,7 +29,6 @@ const CourseDetails = ({
   const discountPercentage =
     ((data?.estimatedPrice - data?.price) / data?.estimatedPrice) * 100;
   const [open, setOpen] = useState(false);
-  const discountPercentagePrice = discountPercentage.toFixed(0);
 
   useEffect(() => {
     setUser(userData?.user);

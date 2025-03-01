@@ -16,13 +16,9 @@ import { Modal, Typography } from "@mui/material";
 import { styles } from "@/app/styles/style";
 import toast from "react-hot-toast";
 
-type Props = {};
-
-const AllCourses = (props: Props) => {
+const AllCourses = () => {
   const { theme, setTheme } = useTheme();
   const [open, setOpen] = useState(false);
-  const [active, setActive] = useState(false);
-
   const [courseId, setCourseId] = useState("");
   const { isLoading, data, refetch } = useGetAllCoursesQuery(
     {},

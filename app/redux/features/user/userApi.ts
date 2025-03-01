@@ -37,6 +37,7 @@ export const userApi = apiSlice.injectEndpoints({
       query: ({ id, role }) => ({
         url: "/user/update-user",
         method: "POST",
+        body: { id, role },
         credentials: "include" as const,
       }),
     }),

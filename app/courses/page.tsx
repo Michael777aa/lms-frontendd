@@ -7,14 +7,10 @@ import { useGetLayoutByTypeQuery } from "../redux/features/layout/layoutApi";
 import Loader from "../components/Loader/Loader";
 import Header from "../components/Header";
 import Heading from "../utils/Heading";
-import { log } from "console";
-import { styles } from "../styles/style";
 import CourseCard from "../components/Course/CourseCard";
 import Footer from "../components/Footer";
 
-type Props = {};
-
-const page = (props: Props) => {
+const Page = () => {
   const searchParams = useSearchParams();
   const search = searchParams?.get("title");
   const { data, isLoading } = useGetUsersAllCoursesQuery(undefined, {});
@@ -23,8 +19,6 @@ const page = (props: Props) => {
   const [open, setOpen] = useState(false);
   const [courses, setCourses] = useState([]);
   const [category, setCategory] = useState("All");
-
-  console.log("Fetched data", categoriesData);
 
   useEffect(() => {
     if (category === "All") {
@@ -118,4 +112,4 @@ const page = (props: Props) => {
   );
 };
 
-export default page;
+export default Page;

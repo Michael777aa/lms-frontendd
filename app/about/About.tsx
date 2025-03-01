@@ -4,7 +4,7 @@ const About = () => {
       <div className="w-[90%] md:w-[80%] lg:w-[70%] m-auto text-center">
         {/* Header */}
         <h1 className="text-[32px] md:text-[42px] lg:text-[50px] font-bold leading-tight text-gray-900">
-          Welcome to <span className="text-blue-600">eLearning</span> – Where
+          Welcome to <span className="text-blue-600">eLearning</span> Where
           Knowledge Meets Innovation!
         </h1>
         <p className="mt-4 text-lg text-gray-700">
@@ -21,8 +21,8 @@ const About = () => {
             Why Choose eLearning?
           </h2>
           <p className="mt-4 text-lg text-gray-800 leading-relaxed">
-            In today’s fast-paced world, **learning should be accessible,
-            engaging, and effective**. That’s why we created{" "}
+            In todays fast-paced world, **learning should be accessible,
+            engaging, and effective**. Thats why we created{" "}
             <span className="font-semibold text-blue-500">eLearning</span>, a
             platform that provides **high-quality education** through
             interactive courses, expert-led tutorials, and hands-on projects.
@@ -34,14 +34,14 @@ const About = () => {
             What Makes Us Different?
           </h2>
           <p className="mt-4 text-lg text-gray-800 leading-relaxed">
-            ✅ **Comprehensive Course Library** – From **beginner** to
+            ✅ **Comprehensive Course Library** From **beginner** to
             **advanced**, we offer structured lessons in programming, design,
-            business, and more. ✅ **Hands-On Learning** – Learn by doing! Our
+            business, and more. ✅ **Hands-On Learning** Learn by doing! Our
             courses include **real-world projects** and coding exercises. ✅
-            **Expert Mentorship** – Gain insights and support from **industry
+            **Expert Mentorship** Gain insights and support from **industry
             professionals** with years of experience. ✅ **Flexible Learning
-            Paths** – Study at your own pace with 24/7 access to all materials.
-            ✅ **Global Community** – Connect with learners worldwide and share
+            Paths** Study at your own pace with 24/7 access to all materials. ✅
+            **Global Community**Connect with learners worldwide and share
             knowledge.
           </p>
 
@@ -59,14 +59,14 @@ const About = () => {
           <br />
 
           <h2 className="text-2xl font-semibold text-blue-600">
-            What You’ll Learn
+            What Youll Learn
           </h2>
           <p className="mt-4 text-lg text-gray-800 leading-relaxed">
-            🎥 **Engaging Video Lessons** – Step-by-step tutorials by top
-            instructors. 💻 **Interactive Coding Challenges** – Apply what you
+            🎥 **Engaging Video Lessons** Step-by-step tutorials by top
+            instructors. 💻 **Interactive Coding Challenges** Apply what you
             learn through live coding exercises. 📝 **Quizzes & Certifications**
-            – Track your progress and earn industry-recognized certificates. 🤝
-            **Collaboration & Networking** – Join study groups and interact with
+            Track your progress and earn industry-recognized certificates. 🤝
+            **Collaboration & Networking** Join study groups and interact with
             like-minded learners.
           </p>
 
@@ -76,9 +76,10 @@ const About = () => {
             Join Us Today!
           </h2>
           <p className="mt-4 text-lg text-gray-800 leading-relaxed">
-            The **future of education is digital**, and we’re here to guide you
-            every step of the way. Take control of your learning journey, build
-            your expertise, and **turn your passion into a profession**.
+            The **future of education is digital**, and
+            wNsAAAAAAAAAAAAAAAAABXeq1mup4kT19Jb6rEQvtblvQ6lx92JXf here to guide
+            you every step of the way. Take control of your learning journey,
+            build your expertise, and **turn your passion into a profession**.
           </p>
         </div>
 

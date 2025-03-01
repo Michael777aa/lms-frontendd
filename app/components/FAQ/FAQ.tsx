@@ -3,9 +3,7 @@ import { styles } from "@/app/styles/style";
 import React, { useEffect, useState } from "react";
 import { HiMinus, HiPlus } from "react-icons/hi";
 
-type Props = {};
-
-const FAQ = (props: Props) => {
+const FAQ = () => {
   const { data } = useGetLayoutByTypeQuery("FAQ", {});
   const [activeQuestion, setActiveQuestion] = useState(null);
   const [questions, setQuestions] = useState<any[]>([]);

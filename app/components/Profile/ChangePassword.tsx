@@ -1,11 +1,9 @@
 "use client";
 import { useUpdatePasswordMutation } from "@/app/redux/features/user/userApi";
-import React, { FC, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 
-type Props = {};
-
-const ChangePassword: FC<Props> = (props) => {
+const ChangePassword = () => {
   const [oldPassword, setOldPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");

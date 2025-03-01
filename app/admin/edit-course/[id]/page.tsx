@@ -3,12 +3,9 @@ import Heading from "@/app/utils/Heading";
 import React from "react";
 import AdminSidebar from "../../../components/Admin/sidebar/AdminSidebar";
 import DashboardHeader from "../../../components/Admin/DashboardHeader";
-import CreateCourse from "@/app/components/Admin/Course/CreateCourse";
 import EditCourse from "@/app/components/Admin/Course/EditCourse";
 
-type Props = {};
-
-const page = ({ params }: any) => {
+const Page = ({ params }: any) => {
   const id = params?.id;
 
   return (
@@ -32,4 +29,4 @@ const page = ({ params }: any) => {
   );
 };
 
-export default page;
+export default Page;

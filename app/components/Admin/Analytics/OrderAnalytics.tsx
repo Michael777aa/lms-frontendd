@@ -31,8 +31,6 @@ export default function OrdersAnalytics({ isDashboard }: Props) {
     });
   }
 
-  console.log("Fetched Data", analyticsData);
-
   return (
     <>
       {isLoading ? (

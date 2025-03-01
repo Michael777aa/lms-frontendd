@@ -14,7 +14,7 @@ type Props = {
 };
 
 const AllInvoices: React.FC<Props> = ({ isDashboard }) => {
-  const { theme, setTheme } = useTheme();
+  const { theme } = useTheme();
   const { isLoading, data } = useGetAllOrdersQuery({});
   const { data: usersData } = useGetAllUsersQuery({});
   const { data: coursesData } = useGetAllCoursesQuery({});

@@ -5,11 +5,10 @@ import Heading from "../utils/Heading";
 import Header from "../components/Header";
 import About from "./About";
 import Footer from "../components/Footer";
-type Props = {};
 
-const Page = (props: Props) => {
+const Page = () => {
   const [open, setOpen] = useState(false);
-  const [activeItem, setActiveItem] = useState(2);
+  const [activeItem] = useState(2);
   const [route, setRoute] = useState("Login");
 
   return (

@@ -2,7 +2,6 @@ import React from "react";
 import Image from "next/image";
 import { styles } from "@/app/styles/style";
 import ReviewCard from "../Review/ReviewCard";
-type Props = {};
 
 const reviews = [
   {
@@ -35,7 +34,7 @@ const reviews = [
   },
 ];
 
-const Reviews = (props: Props) => {
+const Reviews = () => {
   return (
     <div className="w-[90%] 800px:w-[85%] m-auto">
       <div className="w-full 800px:flex items-center gap-6">

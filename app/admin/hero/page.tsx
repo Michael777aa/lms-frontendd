@@ -5,11 +5,7 @@ import AdminSidebar from "../../components/Admin/sidebar/AdminSidebar";
 import DashboardHeader from "../../components/Admin/DashboardHeader";
 import EditHero from "@/app/components/Admin/Customization/EditHero";
 
-type Props = {
-  isTeam: boolean;
-};
-
-const page = (props: Props) => {
+const Page = () => {
   return (
     <div>
       <Heading
@@ -30,4 +26,4 @@ const page = (props: Props) => {
   );
 };
 
-export default page;
+export default Page;

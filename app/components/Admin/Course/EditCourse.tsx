@@ -5,7 +5,6 @@ import CourseData from "./CourseData";
 import CourseContent from "./CourseContent";
 import CoursePreview from "./CoursePreview";
 import {
-  useCreateCourseMutation,
   useEditCourseMutation,
   useGetAllCoursesQuery,
 } from "@/app/redux/features/courses/coursesApi";
@@ -19,10 +18,7 @@ interface Props {
 const EditCourse: FC<Props> = ({ id }) => {
   const [active, setActive] = useState(0);
   const [editCourse, { isSuccess, error }] = useEditCourseMutation();
-  const { data, refetch } = useGetAllCoursesQuery(
-    {},
-    { refetchOnMountOrArgChange: true }
-  );
+  const { data } = useGetAllCoursesQuery({});
 
   useEffect(() => {
     if (isSuccess) {

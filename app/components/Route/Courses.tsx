@@ -2,10 +2,8 @@ import { useGetUsersAllCoursesQuery } from "@/app/redux/features/courses/courses
 import React, { useEffect, useState } from "react";
 import CourseCard from "../Course/CourseCard";
 
-type Props = {};
-
-const Courses = (props: Props) => {
-  const { data, isLoading, error } = useGetUsersAllCoursesQuery({});
+const Courses = () => {
+  const { data } = useGetUsersAllCoursesQuery({});
   const [courses, setCourses] = useState<any[]>([]);
   useEffect(() => {
     setCourses(data?.courses);

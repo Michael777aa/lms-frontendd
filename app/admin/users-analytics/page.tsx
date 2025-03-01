@@ -3,13 +3,9 @@ import Heading from "@/app/utils/Heading";
 import React from "react";
 import AdminSidebar from "../../components/Admin/sidebar/AdminSidebar";
 import DashboardHeader from "../../components/Admin/DashboardHeader";
-import CourseAnalytics from "@/app/components/Admin/Analytics/CourseAnalytics";
 import UserAnalytics from "@/app/components/Admin/Analytics/UserAnalytics";
-type Props = {
-  isTeam: boolean;
-};
 
-const page = (props: Props) => {
+const Page = () => {
   return (
     <div>
       <Heading
@@ -30,4 +26,4 @@ const page = (props: Props) => {
   );
 };
 
-export default page;
+export default Page;

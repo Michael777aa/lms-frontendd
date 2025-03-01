@@ -1,7 +1,4 @@
-import {
-  useGetCourseDetailsQuery,
-  useGetUsersAllCoursesQuery,
-} from "@/app/redux/features/courses/coursesApi";
+import { useGetCourseDetailsQuery } from "@/app/redux/features/courses/coursesApi";
 import React, { useEffect, useState } from "react";
 import Loader from "../Loader/Loader";
 import Heading from "@/app/utils/Heading";
@@ -26,8 +23,6 @@ const CourseDetailsPage = ({ id }: Props) => {
     useCreatePaymentIntentMutation();
   const [stripePromise, setStripePromise] = useState<any>(null);
   const [clientSecret, setClientSecret] = useState("");
-
-  console.log("Fetched Data", config);
 
   useEffect(() => {
     if (config) {

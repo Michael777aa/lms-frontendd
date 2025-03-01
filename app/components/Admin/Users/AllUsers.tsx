@@ -21,10 +21,8 @@ type Props = {
 };
 
 const AllUsers: FC<Props> = ({ isTeam }) => {
-  const { theme, setTheme } = useTheme();
+  const { theme } = useTheme();
   const [active, setActive] = useState(false);
-  const [email, setEmail] = useState("");
-  const [role, setRole] = useState("admin");
   const [open, setOpen] = useState(false);
   const [userId, setUserId] = useState("");
 
@@ -36,8 +34,6 @@ const AllUsers: FC<Props> = ({ isTeam }) => {
   );
   const [deleteUser, { isSuccess: deleteSuccess, error: deleteError }] =
     useDeleteUserMutation({});
-
-  console.log("User Id", userId);
 
   useEffect(() => {
     if (updateError) {

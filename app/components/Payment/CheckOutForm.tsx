@@ -18,7 +18,7 @@ type Props = {
   user: any;
 };
 
-const CheckOutForm = ({ setOpen, data, user }: Props) => {
+const CheckOutForm = ({ data, user }: Props) => {
   const stripe = useStripe();
   const elements = useElements();
   const [message, setMessage] = useState<any>("");

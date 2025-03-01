@@ -9,10 +9,7 @@ import {
   Area,
 } from "recharts";
 import Loader from "../../Loader/Loader";
-import {
-  useGetCoursesAnalyticsQuery,
-  useGetUsersAnalyticsQuery,
-} from "@/app/redux/features/analytics/analyticsApi";
+import { useGetUsersAnalyticsQuery } from "@/app/redux/features/analytics/analyticsApi";
 import { styles } from "@/app/styles/style";
 
 type Props = {
@@ -20,22 +17,7 @@ type Props = {
 };
 
 const UserAnalytics = ({ isDashboard }: Props) => {
-  const { data, isLoading, isError } = useGetUsersAnalyticsQuery({});
-
-  // const analyticsData: any = [
-  //   { name: "January", count: 405 },
-  //   { name: "February", count: 60 },
-  //   { name: "March", count: 78 },
-  //   { name: "April", count: 55 },
-  //   { name: "May", count: 90 },
-  //   { name: "June", count: 110 },
-  //   { name: "July", count: 85 },
-  //   { name: "August", count: 95 },
-  //   { name: "September", count: 120 },
-  //   { name: "October", count: 130 },
-  //   { name: "November", count: 100 },
-  //   { name: "December", count: 140 },
-  // ];
+  const { data, isLoading } = useGetUsersAnalyticsQuery({});
 
   const analyticsData: any = [];
 
@@ -43,8 +25,6 @@ const UserAnalytics = ({ isDashboard }: Props) => {
     data.users.last12Months.forEach((item: any) => {
       analyticsData.push({ name: item.month, count: item.count });
     });
-
-  console.log("Fetched Data", analyticsData);
 
   return (
     <>

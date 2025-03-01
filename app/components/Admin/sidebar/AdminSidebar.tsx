@@ -17,7 +17,6 @@ import {
   QuizIcon,
   WysiwygIcon,
   ManageHistoryIcon,
-  SettingsIcon,
   ExitToAppIcon,
   HomeOutlinedIcon,
 } from "./Icon";

@@ -8,9 +8,7 @@ import { useCreateCourseMutation } from "@/app/redux/features/courses/coursesApi
 import toast from "react-hot-toast";
 import { redirect } from "next/navigation";
 
-interface Props {}
-
-const CreateCourse: React.FC<Props> = (props) => {
+const CreateCourse = () => {
   const [active, setActive] = useState(0);
   const [createCourse, { isLoading, isSuccess, error }] =
     useCreateCourseMutation();

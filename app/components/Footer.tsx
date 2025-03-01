@@ -1,9 +1,7 @@
 import Link from "next/link";
 import React from "react";
 
-type Props = {};
-
-const Footer = (props: Props) => {
+const Footer = () => {
   return (
     <footer className="relative top-[50px] bg-white dark:bg-slate-900">
       <div className="border border-[#0000000e] dark:border-[#ffffff1e]">

@@ -1,4 +1,3 @@
-import Image from "next/image";
 import Link from "next/link";
 import React, { FC, useState } from "react";
 import { BiSearch } from "react-icons/bi";
@@ -6,9 +5,7 @@ import { useGetLayoutByTypeQuery } from "../redux/features/layout/layoutApi";
 import Loader from "./Loader/Loader";
 import { useRouter } from "next/navigation";
 
-type Props = {};
-
-const Hero: FC<Props> = () => {
+const Hero = () => {
   const { data, isLoading } = useGetLayoutByTypeQuery("Banner", {});
   const [search, setSearch] = useState("");
   const router = useRouter();

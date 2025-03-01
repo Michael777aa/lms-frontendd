@@ -7,9 +7,7 @@ import AdminProtected from "@/app/hooks/adminProtected";
 import Heading from "@/app/utils/Heading";
 import React from "react";
 
-type Props = {};
-
-const page = (props: Props) => {
+const Page = () => {
   return (
     <div>
       <AdminProtected>
@@ -32,4 +30,4 @@ const page = (props: Props) => {
   );
 };
 
-export default page;
+export default Page;

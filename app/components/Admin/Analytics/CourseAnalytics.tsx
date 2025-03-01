@@ -12,20 +12,8 @@ import Loader from "../../Loader/Loader";
 import { useGetCoursesAnalyticsQuery } from "@/app/redux/features/analytics/analyticsApi";
 import { styles } from "@/app/styles/style";
 
-type Props = {};
-
-const CourseAnalytics: React.FC<Props> = (props) => {
+const CourseAnalytics = () => {
   const { data, isLoading, isError } = useGetCoursesAnalyticsQuery({});
-
-  //   const analyticsData: any = [
-  //     { name: "dsafsad", uv: 5 },
-  //     { name: "dsaf", uv: 5 },
-  //     { name: "dklsafsadfjldsjk", uv: 3 },
-  //     { name: "dsafdsafas", uv: 1 },
-  //     { name: "dsafasdfsad", uv: 5 },
-  //     { name: "dsfafdsa", uv: 7 },
-  //     { name: "dklsafdsafsdafjldsjk", uv: 8 },
-  //   ];
 
   const analyticsData: any = [];
 
@@ -33,8 +21,6 @@ const CourseAnalytics: React.FC<Props> = (props) => {
     data.courses.last12Months.forEach((item: any) => {
       analyticsData.push({ name: item.month, uv: item.count });
     });
-
-  console.log("Fetched Data", analyticsData);
 
   const minValue = 0;
 

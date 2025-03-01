@@ -26,7 +26,7 @@ type Props = {
 };
 
 const Header: FC<Props> = ({ activeItem, setOpen, route, open, setRoute }) => {
-  const [openSidebar, setOpenSidebar] = useState(false);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const {
     data: userData,
     isLoading,
@@ -34,41 +34,31 @@ const Header: FC<Props> = ({ activeItem, setOpen, route, open, setRoute }) => {
   } = useLoadUserQuery(undefined, {});
   const user = useSelector((state: any) => state.auth.user);
   const { data } = useSession();
-  const [logout, setLogout] = useState(false);
   const [socialAuth, { isSuccess }] = useSocialAuthMutation();
 
   useEffect(() => {
-    if (!isLoading) {
-      if (!userData) {
-        socialAuth({
-          email: data?.user?.email,
-          name: data?.user?.name,
-          avatar: data?.user?.image,
-        });
-        refetch();
-      }
+    if (!isLoading && !userData && data?.user?.email) {
+      socialAuth({
+        email: data?.user?.email,
+        name: data?.user?.name,
+        avatar: data?.user?.image,
+      });
+      refetch();
     }
-    if (data == null) {
-      if (isSuccess) {
-        toast.success("Login successfully");
-      }
+    if (data && isSuccess) {
+      toast.success("Login successfully");
     }
-    if (data === null && !isLoading && !userData) {
-      setLogout(true);
-    }
-  }, [data, userData, isSuccess]);
+  }, [data, userData, isSuccess, refetch, socialAuth]);
 
-  const handleClose = (e: any) => {
+  const handleCloseSidebar = (e: any) => {
     if (e.target.id === "screen") {
-      setOpenSidebar(false);
+      setIsSidebarOpen(false);
     }
   };
 
   return (
     <div className="w-full relative">
-      <div
-        className={`bg-white fixed top-0 left-0 w-full h-[80px] z-[80] border-b shadow-xl transition duration-500 dark:bg-slate-900 dark:border-[#fffffff1c]`}
-      >
+      <div className="bg-white fixed top-0 left-0 w-full h-[80px] z-[80] border-b shadow-xl transition duration-500 dark:bg-slate-900 dark:border-[#fffffff1c]">
         <div className="w-[95%] 800px:w-[92%] m-auto py-2 h-full">
           <div className="w-full h-[80px] flex items-center justify-between">
             <Link
@@ -85,11 +75,11 @@ const Header: FC<Props> = ({ activeItem, setOpen, route, open, setRoute }) => {
                 <HiOutlineMenuAlt3
                   size={25}
                   className="cursor-pointer dark:text-white text-black"
-                  onClick={() => setOpenSidebar(true)}
+                  onClick={() => setIsSidebarOpen(true)}
                 />
               </div>
               {user ? (
-                <Link href={"/profile"}>
+                <Link href="/profile">
                   <Image
                     src={user?.avatar?.url || avatar}
                     alt="User Avatar"
@@ -114,10 +104,10 @@ const Header: FC<Props> = ({ activeItem, setOpen, route, open, setRoute }) => {
         </div>
 
         {/* Mobile Sidebar */}
-        {openSidebar && (
+        {isSidebarOpen && (
           <div
             className="fixed w-full h-screen top-0 left-0 z-[99999] dark:bg-[unset] bg-[#00000024]"
-            onClick={handleClose}
+            onClick={handleCloseSidebar}
             id="screen"
           >
             <div className="w-[70%] fixed z-[999999999] h-screen bg-white dark:bg-slate-900 dark:bg-opacity-90 top-0 right-0">
@@ -152,17 +142,6 @@ const Header: FC<Props> = ({ activeItem, setOpen, route, open, setRoute }) => {
           }
         />
       )}
-
-      {/* Video Chat */}
-      {/* <div>
-        <button
-          onClick={() => setShowVideoChat((prev) => !prev)}
-          className="bg-blue-500 text-white px-3 py-2 rounded-lg mt-2"
-        >
-          {showVideoChat ? "Close Video Chat" : "Open Video Chat"}
-        </button>
-        {showVideoChat && <VideoChat />}
-      </div> */}
     </div>
   );
 };

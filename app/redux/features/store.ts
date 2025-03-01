@@ -14,7 +14,7 @@ export const store = configureStore({
     getDefaultMiddleware().concat(apiSlice.middleware),
 });
 
-// call the load user function on every page load
+// call the load user function on every Page load
 
 const initializeApp = async () => {
   await store.dispatch(
