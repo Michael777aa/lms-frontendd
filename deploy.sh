@@ -2,8 +2,13 @@
 
 # PRODUCTION DEPLOYMENT SCRIPT
 
+# Ensure Yarn is installed
+if ! command -v yarn &> /dev/null; then
+  npm install -g yarn
+fi
+
 # Reset any local changes
-git reset --hard
+# git reset --hard
 
 # Switch to master branch
 git checkout master
@@ -11,14 +16,14 @@ git checkout master
 # Pull the latest changes
 git pull origin master
 
-# Install Yarn globally if not installed
-npm install -g yarn
-
 # Install dependencies
 yarn install
 
 # Build the project
-yarn run build
+if ! yarn run build; then
+  echo "Build failed!"
+  exit 1
+fi
 
 # Stop & delete previous PM2 process (if exists)
 pm2 stop LMS_FRONTEND || true
