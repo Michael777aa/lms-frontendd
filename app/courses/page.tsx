@@ -1,6 +1,5 @@
 "use client";
 
-import { useSearchParams } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import { useGetLayoutByTypeQuery } from "../redux/features/layout/layoutApi";
 import Loader from "../components/Loader/Loader";
@@ -11,9 +10,6 @@ import Footer from "../components/Footer";
 import { useGetAllCoursesQuery } from "../redux/features/courses/coursesApi";
 
 const Page = () => {
-  const searchParams = useSearchParams(); // Fetch the search parameters
-  const search = searchParams?.get("title") || ""; // Get the "title" parameter if it exists
-
   // Fetch courses and categories data from API
   const { data, isLoading } = useGetAllCoursesQuery({});
   const { data: categoriesData } = useGetLayoutByTypeQuery("Categories", {});
@@ -35,15 +31,10 @@ const Page = () => {
       }
 
       // Filter by search query
-      if (search) {
-        filteredCourses = filteredCourses.filter((course: any) =>
-          course.name.toLowerCase().includes(search.toLowerCase())
-        );
-      }
 
       setCourses(filteredCourses); // Update the courses state
     }
-  }, [data, category, search]); // Re-run effect when data, category, or search changes
+  }, [data, category]); // Re-run effect when data, category, or search changes
 
   // Fetch categories from layout data
   const categories = categoriesData?.layout.categories;
