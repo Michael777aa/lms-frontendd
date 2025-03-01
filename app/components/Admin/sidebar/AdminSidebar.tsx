@@ -1,6 +1,6 @@
 "use client";
 import { FC, JSX, useEffect, useState } from "react";
-import { ProSidebar, Menu, MenuItem } from "react-pro-sidebar";
+import { ProSidebar, Menu, MenuItem } from "react-pro-sidebar/dist";
 import { Box, IconButton, Typography } from "@mui/material";
 
 import {
