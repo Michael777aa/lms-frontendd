@@ -28,9 +28,6 @@ const eslintConfig = [
       "@next/next/no-img-element": "off", // Disable image optimization warnings
       "jsx-a11y/role-supports-aria-props": "off", // Disable accessibility warnings
     },
-    experimental: {
-      missingSuspenseWithCSRBailout: false,
-    },
   },
 ];
 
