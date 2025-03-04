@@ -119,7 +119,7 @@ const CourseContentMedia = ({
       setAnswer("");
       refetch();
       toast.success("Answer added successfully");
-      if (user.role !== "admin") {
+      if (user) {
         socketId.emit("notification", {
           title: `New Review Received`,
           message: `You have a new question reply in ${data[activeVideo].title}`,
@@ -447,17 +447,16 @@ const CourseContentMedia = ({
                           {format(item?.createdAt)} •
                         </small>
                       </div>
-                      {user.role === "admin" &&
-                        item.commentReplies.length === 0 && (
-                          <span
-                            className={`${styles.label} cursor-pointer`}
-                            onClick={() => {
-                              setIsReviewReply(true), setReviewId(item._id);
-                            }}
-                          >
-                            Add Reply
-                          </span>
-                        )}
+                      {user && item.commentReplies.length === 0 && (
+                        <span
+                          className={`${styles.label} cursor-pointer`}
+                          onClick={() => {
+                            setIsReviewReply(true), setReviewId(item._id);
+                          }}
+                        >
+                          Add Reply
+                        </span>
+                      )}
 
                       {isReviewReply && reviewId === item._id && (
                         <div className="w-full flex relative">
@@ -496,7 +495,7 @@ const CourseContentMedia = ({
                           <div className="pl-2">
                             <div className="flex items-center">
                               <h5 className="text-[20px]">{item?.user.name}</h5>
-                              {item.user.role === "admin" && (
+                              {item.user && (
                                 <VscVerifiedFilled className="text-[#50c750] ml-2 text-[20px]" />
                               )}
                             </div>
@@ -628,7 +627,7 @@ const CommentItem = ({
                 <div className="pl-3">
                   <div className="flex items-center">
                     <h5 className="text-[20px]">{item?.user.name}</h5>
-                    {item.user.role === "admin" && (
+                    {item.user && (
                       <VscVerifiedFilled className="text-[#50c750] ml-2 text-[20px]" />
                     )}
                   </div>

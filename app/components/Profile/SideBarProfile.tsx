@@ -67,7 +67,7 @@ const SideBarProfile: FC<Props> = ({
           Enrolled Courses
         </h5>
       </div>
-      {user?.role === "admin" && (
+      {user && (
         <Link href={"/admin"}>
           <div
             onClick={() => setActive(6)}

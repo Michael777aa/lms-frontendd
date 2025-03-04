@@ -26,7 +26,7 @@ const AllUsers: FC<Props> = ({ isTeam }) => {
   const [open, setOpen] = useState(false);
   const [userId, setUserId] = useState("");
 
-  const [updateUserRole, { error: updateError, isSuccess }] =
+  const [updateUser, { error: updateError, isSuccess }] =
     useUpdateUserRoleMutation();
   const { isLoading, data, refetch } = useGetAllUsersQuery(
     {},
@@ -115,21 +115,6 @@ const AllUsers: FC<Props> = ({ isTeam }) => {
   const rows: any = [];
 
   if (isTeam) {
-    const newData =
-      data && data.users.filter((item: any) => item.role === "admin");
-
-    newData &&
-      newData.forEach((item: any) => {
-        rows.push({
-          id: item._id,
-          name: item.name,
-          email: item.email,
-          role: item.role,
-          courses: item.courses.length,
-          created_at: format(item.createdAt),
-        });
-      });
-  } else {
     data &&
       data.users.forEach((item: any) => {
         rows.push({
