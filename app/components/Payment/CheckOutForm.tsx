@@ -6,7 +6,7 @@ import {
   PaymentElement,
 } from "@stripe/react-stripe-js";
 import { useCreateOrderMutation } from "@/app/redux/features/orders/ordersApi";
-import { useLoadUserQuery } from "@/app/redux/features/api/apiSlice";
+
 import { redirect } from "next/navigation";
 import toast from "react-hot-toast";
 import socketIO from "socket.io-client";
@@ -23,10 +23,7 @@ const CheckOutForm = ({ data, user }: Props) => {
   const elements = useElements();
   const [message, setMessage] = useState<any>("");
   const [createOrder, { data: orderData, error }] = useCreateOrderMutation();
-  const [loadUser, setLoadUser] = useState<boolean>(false);
-  const { data: userData } = useLoadUserQuery({
-    skip: loadUser ? false : true,
-  });
+
   const [isLoading, setIsLoading] = useState(false);
 
   const handleSubmit = async (e: any) => {
@@ -50,7 +47,6 @@ const CheckOutForm = ({ data, user }: Props) => {
 
   useEffect(() => {
     if (orderData) {
-      setLoadUser(true);
       socketId.emit("notification", {
         title: "New order",
         message: `You have a new order from ${data.name}`,

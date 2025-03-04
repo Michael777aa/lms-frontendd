@@ -7,7 +7,7 @@ import {
   useEditProfileMutation,
   useUpdateAvatarMutation,
 } from "@/app/redux/features/user/userApi";
-import { useLoadUserQuery } from "@/app/redux/features/api/apiSlice";
+
 import toast from "react-hot-toast";
 
 type Props = {
@@ -18,10 +18,8 @@ type Props = {
 const ProfileInfo: FC<Props> = ({ avatar, user }) => {
   const [name, setName] = useState(user?.name || "");
   const [updateAvatar, { isSuccess, error }] = useUpdateAvatarMutation();
-  const [loadUser, setLoadUser] = useState(false);
   const [editProfile, { isSuccess: success, error: updateError }] =
     useEditProfileMutation();
-  useLoadUserQuery(undefined, { skip: !loadUser });
 
   const imageHandler = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -35,17 +33,6 @@ const ProfileInfo: FC<Props> = ({ avatar, user }) => {
     };
     fileReader.readAsDataURL(file);
   };
-
-  useEffect(() => {
-    if (isSuccess || success) {
-      setLoadUser(true);
-      toast.success("Profile updated successfully");
-    }
-    if (error || updateError) {
-      toast.error("Failed to update profile");
-      console.log(error || updateError);
-    }
-  }, [isSuccess, error, success, updateError]);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();

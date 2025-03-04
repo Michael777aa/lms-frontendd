@@ -7,10 +7,9 @@ import Header from "../Header";
 import CourseContentList from "./CourseContentList";
 type Props = {
   id: string;
-  user: any;
 };
 
-const CourseContent = ({ id, user }: Props) => {
+const CourseContent = ({ id }: Props) => {
   const {
     data: contentData,
     isLoading,
@@ -47,7 +46,6 @@ const CourseContent = ({ id, user }: Props) => {
             id={id}
             activeVideo={activeVideo}
             setActiveVideo={setActiveVideo}
-            user={user}
             refetch={refetch}
           />
         </div>

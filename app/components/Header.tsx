@@ -12,7 +12,6 @@ import avatar from "../public/assets/default-user.png";
 import { useSession } from "next-auth/react";
 import { useSocialAuthMutation } from "../redux/features/auth/authApi";
 import toast from "react-hot-toast";
-import { useLoadUserQuery } from "../redux/features/api/apiSlice";
 
 type Props = {
   open: boolean;
@@ -24,29 +23,10 @@ type Props = {
 
 const Header: FC<Props> = ({ activeItem, setOpen, route, open, setRoute }) => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-  const {
-    data: userData,
-    isLoading,
-    refetch,
-  } = useLoadUserQuery(undefined, {});
+
   const user = useSelector((state: any) => state.auth.user);
   const { data } = useSession();
   const [socialAuth, { isSuccess }] = useSocialAuthMutation();
-
-  useEffect(() => {
-    if (!isLoading && !userData && data?.user?.email) {
-      // If the user doesn't exist in your system, trigger socialAuth to register
-      socialAuth({
-        email: data?.user?.email,
-        name: data?.user?.name,
-        avatar: data?.user?.image,
-      });
-      refetch(); // Refresh user data after auth
-    }
-    if (data && isSuccess) {
-      toast.success("Login successfully");
-    }
-  }, [data, userData, isSuccess, refetch, socialAuth]);
 
   const handleCloseSidebar = (e: any) => {
     if (e.target.id === "screen") {
@@ -134,7 +114,6 @@ const Header: FC<Props> = ({ activeItem, setOpen, route, open, setRoute }) => {
           setOpen={setOpen}
           setRoute={setRoute}
           activeItem={activeItem}
-          refetch={refetch}
           component={
             route === "Login" ? Login : route === "Sign-Up" ? SignUp : null
           }
