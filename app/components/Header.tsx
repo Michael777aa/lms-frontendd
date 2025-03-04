@@ -6,7 +6,6 @@ import { HiOutlineMenuAlt3, HiOutlineUserCircle } from "react-icons/hi";
 import CustomModal from "../utils/CustomModel";
 import Login from "./Auth/Login";
 import SignUp from "./Auth/SignUp";
-import Verification from "./Auth/Verification";
 import { useSelector } from "react-redux";
 import Image from "next/image";
 import avatar from "../public/assets/default-user.png";
@@ -137,11 +136,7 @@ const Header: FC<Props> = ({ activeItem, setOpen, route, open, setRoute }) => {
           activeItem={activeItem}
           refetch={refetch}
           component={
-            route === "Login"
-              ? Login
-              : route === "Sign-Up"
-              ? SignUp
-              : Verification
+            route === "Login" ? Login : route === "Sign-Up" ? SignUp : null
           }
         />
       )}

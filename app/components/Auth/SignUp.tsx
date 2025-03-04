@@ -28,7 +28,6 @@ const Signup: FC<Props> = ({ setRoute }) => {
     if (isSuccess) {
       const message = data?.message || "Registration successful";
       toast.success(message);
-      setRoute("Verification");
     }
     if (error) {
       if ("data" in error) {
@@ -42,7 +41,6 @@ const Signup: FC<Props> = ({ setRoute }) => {
     initialValues: { email: "", password: "", name: "" },
     validationSchema: schema,
     onSubmit: async ({ name, email, password }) => {
-      // setRoute("Verification");
       const data = {
         name,
         email,
@@ -62,7 +60,7 @@ const Signup: FC<Props> = ({ setRoute }) => {
           </label>
           <input
             type="text"
-            name=""
+            name="name"
             value={values.name}
             onChange={handleChange}
             id="name"
@@ -78,7 +76,7 @@ const Signup: FC<Props> = ({ setRoute }) => {
         </label>
         <input
           type="email"
-          name=""
+          name="e"
           value={values.email}
           onChange={handleChange}
           id="email"

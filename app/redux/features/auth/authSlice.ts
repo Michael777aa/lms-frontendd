@@ -30,26 +30,33 @@
 //   authSlice.actions;
 
 // export default authSlice.reducer;
-
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 
+// ✅ Define User Type
 type User = {
   name?: string;
   email?: string;
   avatar?: string;
 };
 
-const initialState = {
+// ✅ Define Auth State Type
+type AuthState = {
+  token: string;
+  user: User | null;
+};
+
+// ✅ Initial State with Proper Type
+const initialState: AuthState = {
   token: "",
-  user: null as User | null, // ✅ Ensure `user` is null when not logged in
+  user: null, // Ensure `user` is null when not logged in
 };
 
 const authSlice = createSlice({
   name: "auth",
   initialState,
   reducers: {
-    useRegistration: (state, action: PayloadAction<{ token: string }>) => {
-      // ✅ Renamed from `useRegistration`
+    // ✅ Renamed `useRegistration` to `userRegistered` for consistency
+    userRegistration: (state, action: PayloadAction<{ token: string }>) => {
       state.token = action.payload.token;
     },
     userLoggedIn: (
@@ -57,7 +64,7 @@ const authSlice = createSlice({
       action: PayloadAction<{ accessToken: string; user: User }>
     ) => {
       state.token = action.payload.accessToken;
-      state.user = action.payload.user; // ✅ User should be an object, not a string
+      state.user = action.payload.user; // ✅ Ensure user is an object
     },
     userLoggedOut: (state) => {
       state.token = "";
@@ -66,7 +73,8 @@ const authSlice = createSlice({
   },
 });
 
-export const { useRegistration, userLoggedIn, userLoggedOut } =
+// ✅ Export actions with correct names
+export const { userRegistration, userLoggedIn, userLoggedOut } =
   authSlice.actions;
 
 export default authSlice.reducer;

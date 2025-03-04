@@ -1,5 +1,5 @@
 import { apiSlice } from "../api/apiSlice";
-import { useRegistration, userLoggedIn, userLoggedOut } from "./authSlice";
+import { userLoggedIn, userLoggedOut } from "./authSlice";
 
 type RegistrationResponse = {
   message: string;
@@ -17,19 +17,6 @@ export const AuthApi = apiSlice.injectEndpoints({
         body: data,
         credentials: "include" as const,
       }),
-      async onQueryStarted(arg, { queryFulfilled, dispatch }) {
-        try {
-          const result = await queryFulfilled;
-          // Dispatch the action directly instead of using the hook
-          dispatch(
-            useRegistration({
-              token: result.data.activationToken,
-            })
-          );
-        } catch (error: any) {
-          console.log(error);
-        }
-      },
     }),
     activation: builder.mutation({
       query: ({ activation_token, activation_code }) => ({

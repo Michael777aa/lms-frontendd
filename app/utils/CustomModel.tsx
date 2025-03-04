@@ -7,7 +7,7 @@ type Props = {
   open: boolean;
   setOpen: (open: boolean) => void;
   activeItem?: any;
-  component: React.ComponentType<any>;
+  component: React.ComponentType<any> | null;
   setRoute?: (route: string) => void;
   refetch?: any;
 };
