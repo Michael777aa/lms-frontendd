@@ -12,7 +12,7 @@ git checkout master
 git pull origin master
 
 # Install Yarn globally if not installed
-
+npm run build
 
 
 pm2 start "npm run start" --name=frontend

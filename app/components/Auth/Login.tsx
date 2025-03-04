@@ -62,13 +62,11 @@ const Login: FC<Props> = ({ setRoute, setOpen, refetch }) => {
         </label>
         <input
           type="email"
-          name="email"
           value={values.email}
-          onChange={handleChange}
-          id="email"
+          onChange={(e) => formik.setFieldValue("email", e.target.value)}
           placeholder="loginmail@gmail.com"
-          className={`${styles.input}`}
         />
+
         {errors.email && touched.email && (
           <span className="text-red-500 pt-2 block">{errors.email}</span>
         )}
